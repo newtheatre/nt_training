@@ -23,7 +23,8 @@ Using your preferred mechanism, create a virtual Python environment. This could 
 virtualenv <dir>
 ``` 
 
-Where `<dir>` is a given directory; something like `training`
+Where `<dir>` is a given directory; something like `training` or `venv`
+Ensure the Python version is 3.5 (if it is not the default) by running `virtualenv <dir> --python=python3.5` or similar. 
 #### Activate the virtualenv 
 
 ```
@@ -33,7 +34,7 @@ Where `<dir>` is a given directory; something like `training`
 **Unix**
 source <virtualenv_dir>/bin/activate
 ``` 
-
+At this point you can check the Python version by running `python --version`. 
 #### Install the requirements 
 
 ```
