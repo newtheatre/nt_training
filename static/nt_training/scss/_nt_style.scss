@@ -1,0 +1,80 @@
+.nt-orange {
+	color: theme-color("secondary");
+}
+.nt-purple {
+	color: theme-color("primary");
+}
+.bg-nt-purple {
+	background: theme-color("primary");
+}
+.bg-nt-orange {
+	background: theme-color("secondary");
+	color: $gray-900;
+}
+
+.clickme, .btn {
+	cursor: pointer;
+}
+.underhover:hover {
+	text-decoration: underline;
+}
+
+.navbar-dark {
+	background: $nt-purple-dark;
+}
+.navbar-brand > img {
+	height: 80px;
+}
+button.navbar-toggler {
+	margin-top: 7px;
+}
+
+@media(max-width:768px){
+	.navbar-brand > img {
+		height: 40px;
+	}
+}
+@media(min-width:768px){
+	.navbar-nav {
+		margin-left: 40px;
+	}
+}
+
+a.nocolor {
+	color: inherit;
+	:hover, :hover > * {
+		text-decoration: none;
+	}
+}
+
+.fa-committee {
+	color: theme-color("secondary");
+}
+
+td.wrapme {
+	white-space: normal !important; /*override bootstrap*/
+}
+tr.danger, tr.success {
+	color: $gray-900;
+}
+
+.btn, .btn-block {
+	white-space: normal;
+}
+.button-people, .button-sessions {
+	padding: 1rem;
+	@media(max-width:768px){
+		padding-top: 0px;
+	}
+}
+.btn-primary.active {
+	background: $nt-purple-dark;
+}
+.btn-primary:focus {
+	box-shadow: 0 0 0 1px rgba(theme-color("primary"), .25);
+}
+
+.label-block {
+	display: inline;
+	// Override Bootstrap on small viewports (only)
+}

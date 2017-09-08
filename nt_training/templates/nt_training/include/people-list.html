@@ -1,0 +1,59 @@
+{% load nt_filters %}
+
+<!-- Filtering buttons -->
+<div class="row justify-content-center">
+	<!-- Buttons -->
+	<div class="col-12 col-sm-10 col-md-9">
+		<div class="btn-group d-flex" role="group" aria-label="Filtering options - students, committee members and graduates">
+			<span class="w-100 btn bg-nt-orange" style="cursor: default;" data-toggle="tooltip" data-placement="top" title="Filter"><i class="fa fa-fw fa-filter" aria-label="Filter"></i><span class="d-none d-sm-inline"><strong>&nbsp;Filter:</strong></span></span>
+			<button type="button" class="w-100 btn btn-primary btn-filter" id="STU" data-toggle="tooltip" data-placement="top" title="Student"><i class="fa fa-lg fa-fw fa-user"></i><span class="d-none d-lg-inline">&nbsp; Student</span></button>
+			<button type="button" class="w-100 btn btn-primary btn-filter" id="committee" data-toggle="tooltip" data-placement="top" title="Committee Member"><i class="fa fa-lg fa-fw fa-star fa-committee"></i><span class="d-none d-lg-inline">&nbsp; Committee</span></button>
+			<button type="button" class="w-100 btn btn-primary btn-filter" id="GRAD" data-toggle="tooltip" data-placement="top" title="Graduate"><i class="fa fa-lg fa-fw fa-graduation-cap"></i><span class="d-none d-lg-inline">&nbsp; Graduate</span></button>
+			<button type="button" class="w-100 btn btn-primary btn-filter" id="clear" data-toggle="tooltip" data-placement="top" title="Clear"><i class="fa fa-lg fa-fw fa-times-circle"></i><span class="d-none d-lg-inline">&nbsp; Clear</span></button>
+		</div>
+		<br />
+	</div>
+	<!-- Search -->
+	<div class="col-12 col-sm-10 col-md-3">
+		<div class="input-group">
+			<span class="input-group-addon"><i class="fa fa-search fa-fw nt-purple" aria-label="Search"></i></span>
+			<input id="people-search" class="form-control" placeholder="Search">
+		</div>
+	<br />
+	</div>
+</div>
+
+<!-- People -->
+<div class="row" id="peopleList">
+{% for person in people %}
+	{% if form is None %}
+		<div class="col-xl-3 col-lg-4 col-6 button-people person-{{ person.status }} {% if person.committee == True %}person-committee{% endif %}">
+			<a href="{% url 'nt_training:ntPerson' person.slug %}" class="btn btn-primary btn-block">
+				<h6 class="lead"><i class="fa fa-fw {% if person.status == 'GRAD' %}fa-graduation-cap{% elif person.committee == True %}fa-committee fa-star{% else %}fa-user{% endif %} float-md-left mt-md-1"></i>&nbsp;{{ person }}</h6>
+			</a>
+		</div>
+	{% else %}
+		<div class="col-xl-3 col-lg-4 col-md-6 col-12 button-people person-{{ person.status }} {% if person.committee == True %}person-committee{% endif %}">
+			{% with form.trainee|return_item:forloop.counter0 as trainee_form %}
+			<label class="label-block"><!-- So the whole button activates the checkbox, and is full-width on small viewports -->
+				<div class="btn btn-primary btn-block button-checkbox btn-sm">
+					<h5>
+						<div class="row">
+							<div class="col">
+								<i class="fa fa-fw {% if person.status == 'GRAD' %}fa-graduation-cap{% elif person.committee == True %}fa-committee fa-star{% else %}fa-user{% endif %} float-left mt-1"></i>&nbsp;
+								<div class="d-inline-block w-50 lead small person-checkbox"><span class="d-none">{{ trainee_form.tag }}</span>{{ person }}&nbsp;</div>
+								<i class="fa fa-fw fa-circle-o button-checkbox-icon float-right mt-1"></i>
+							</div>
+						</div>
+					</h5>
+				</div>
+			</label>
+			{% endwith %}
+		</div>
+	{% endif %}
+	<!-- The below should go away with Bootstrap 4 -->
+	<!-- {% if forloop.counter|divisibleby:"4" %}<div class="clearfix clearfixjs visible-lg-block visible-md-block"></div>{% endif %} -->
+	<!-- {% if forloop.counter|divisibleby:"3" %}<div class="clearfix clearfixjs visible-sm-block"></div>{% endif %} -->
+	<!-- {% if forloop.counter|divisibleby:"2" %}<div class="clearfix clearfixjs visible-xs-block"></div>{% endif %} -->
+{% endfor %}
+</div>

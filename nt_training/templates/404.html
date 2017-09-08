@@ -1,0 +1,27 @@
+{% extends 'nt_training/base.html' %}
+{% block title %}404 - Page Not Found{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="col">
+		<h1 class="text-center">404 - <strong>{{ request.get_full_path }}</strong> not found</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="col">
+		<p class="text-center">Something has gone awry - the page you're trying to get to simply is not here.</p>
+		<p class="text-center"><a role="button" class="btn btn-primary btn-lg" href="{% url 'nt_training:ntHome' %}">Try going to the home page</a></p>
+	</div>
+</div>
+<div class="row">
+	<div class="col">
+		<p class="text-center">The tech kitten can see herself, but not the page you're looking for. Try again.</p>
+	</div>
+</div>
+<div class="row">
+	<div class="col">
+		<img class="mx-auto d-block img-fluid rounded" src="http://placekitten.com/300/300?image=14" />
+	</div>
+</div>
+
+{% endblock %}

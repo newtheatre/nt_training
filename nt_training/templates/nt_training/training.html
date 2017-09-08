@@ -1,0 +1,23 @@
+{% extends 'nt_training/base.html' %}
+{% load nt_spec %}
+{% load nt_training_sessions %}
+{% block title %}Training Categories{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col">
+	 <h1 class="text-center">Training Categories</h1>
+  </div>
+</div>
+<div class="row">
+	<div class="col">
+		<p>Click a training item to see who has trained others, and who has been trained on that item.</p>
+	</div>
+</div>
+<div class="row">
+  <div class="col">
+	 {% training_cards %}
+  </div>
+</div>
+
+{% endblock %}

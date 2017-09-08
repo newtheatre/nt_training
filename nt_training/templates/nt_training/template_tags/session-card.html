@@ -1,0 +1,23 @@
+			{% load nt_training_sessions %}
+			{# Display training sessions as a grid of cards #}
+			<div class="row">
+				{% for session in sessions %}
+					<div class="col-lg-3 col-md-4 col-sm-6 col-12 my-2 ">
+						<div class="card" style="height:100%;">
+							<div class="card-header text-center bg-secondary p-0">
+								<a href="{% url 'nt_training:ntSessionSingle' session.pk %}" class="btn btn-block btn-primary rounded-0">
+									<h5>Trainer: <strong>{{ session.trainer }}</strong></h5>
+									<span>{{ session.date }}</span>
+								</a>
+							</div>
+							<div class="card-body text-center">
+								<p class="mb-0">Areas covered:</p>
+								{% session_cats session as session_cat_dict %}
+								{% for icon, name in session_cat_dict.items %}
+									<i class="fa fa-fw fa-{{ icon }} fa-lg nt-orange" data-toggle="tooltip" data-placement="top" title="{{ name }}" aria-label="{{ name }}"></i>&nbsp;
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>

@@ -1,0 +1,19 @@
+// NNT Training SCSS
+	@import "nt_variables"; 
+
+// Bootstrap
+	// Import custom Bootstrap variables
+	// @import "bootstrap-variables_3.3.7";
+	@import "bootstrap-variables";
+	
+	// Import Bootstrap
+	@import "bootstrap";
+	// or Import Bootstrap Flex
+	// @import "bootstrap-flex";
+	// or Import Bootstrap Grid
+	// @import "bootstrap-grid";
+	// or Import Bootstrap Reboot
+	// @import "bootstrap-reboot";
+
+// Custom CSS
+	@import "nt_style";

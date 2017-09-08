@@ -1,0 +1,97 @@
+{% extends 'nt_training/base.html' %}
+{% load nt_training_sessions %}
+{% load nt_spec %}
+{% block title %}{{ person|title }}{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-3 col-12 mb-2 mb-md-0 text-center text-md-left">
+    <a href="{% url 'nt_training:ntPeople' %}"><button class="btn btn-primary btn-lg align-middle"><i class="fa fa-fw fa-lg fa-users nt-orange"></i> View all people</button></a>
+  </div>
+  <div class="col-md-6 col-12">
+    <h1 class="text-center">{{ person|title }}
+    	<small>
+    		{% if person.status == 'GRAD' %}
+	    		<span class="badge badge-success">
+	    			<i class="fa fa-fw fa-graduation-cap" aria-label="Graduated in ""></i> 
+	    			{% if person.grad_year %}{{ person.grad_year }}{% else %}Unknown{% endif %}
+	    		</span>
+	    	{% elif person.status == 'STU' %}
+	    		<span class="badge badge-primary">Student</span>
+	    	{% else %}
+	    		<span class="badge badge-dark">
+	    			<i class="fa fa-fw fa-graduation-cap" aria-label="Graduated"></i>
+	    			Unknown
+	    		</span>
+	    	{% endif %}
+        &nbsp;
+        {% if person.committee == True %}
+          <br />
+          <span class="badge badge-primary">
+            <i class="fa fa-fw fa-star fa-committee" aria-hidden="True"></i>
+            Current Committee
+          </span>
+        {% endif %}
+	    </small>
+    </h1>
+    {% if user.is_authenticated and person.email %}
+      <h3 class="text-center text-muted"><a href="mailto:{{ person.email }}" class="nocolor nounder"><i class="fa fa-fw fa-envelope-o"></i>&nbsp;<span class="underhover">{{ person.email }}</span></a></h3>
+    {% endif %}
+  </div>
+</div>
+<div class="row mt-2">
+  <div class="col">
+	 {% training_cards person=person %}
+  </div>
+</div>
+
+<!-- Full table of records --> 
+<div class="row mt-1">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bg-primary clickme">
+        <a data-toggle="collapse" data-target="#collapse-{{person.slug}}" class="collapsea text-white nocolor">
+          <div style="width:100%"><h4>Training sessions {{ person|title }} has been involved in<i class="fa fa-chevron-down fa-pull-right"></i></h4></div>
+        </a>
+      </div>
+      <div class="collapse card-body" id="collapse-{{person.slug}}">
+        {% person_trainee person as sessions %}
+        <div class="row">
+          <div class="col">
+            <h3><strong>Training Received</strong></h3>
+            {% if not sessions %}
+            <p class="text-muted">{{ person.first_name|title }} has received no training.</p>
+            {% endif %}
+          </div>
+        </div>
+        {% if sessions %}
+        <div class="row my-2">
+          <div class="col">
+            {% session_cards sessions=sessions %}
+          </div>
+        </div>
+        {% endif %}
+        {% person_trained person as sessions %}
+        <div class="row">
+          <div class="col">
+            <h3><strong>Training Given</strong></h3>
+            {% if not sessions %}
+                <p class="text-muted">{{ person.first_name|title }} has given no training.</p>
+            {% endif %}
+          </div>
+        </div>
+        {% if sessions %}
+        <div class="row my-2">
+          <div class="col">
+            {% session_cards sessions %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

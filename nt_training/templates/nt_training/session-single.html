@@ -1,0 +1,73 @@
+{% extends 'nt_training/base.html' %}
+{% load nt_navbar %}
+{% load nt_spec %}
+{% block title %}Session {{ object.pk }}{% endblock %}
+
+{% block content %}
+	<div class="card">
+		<div class="card-header bg-primary">
+			<div class="row">
+				<div class="col-sm-3 col-12 my-2 my-sm-0 text-center text-sm-left">
+			    <a href="{% url 'nt_training:ntSessions' %}" class="btn btn-secondary btn-lg"><i class="fa fa-fw fa-lg fa-list"></i> <span class="d-sm-none d-lg-inline">View all sessions</span></a>
+			  </div>
+				<div class="col-sm-6 col-12 text-center mt-1">
+					<h3 class="">Training Session {{ object.pk }}</h3>
+				</div>
+				{% if user.is_authenticated %}
+				  <div class="col-sm-3 col-12 text-center text-sm-right my-2 my-sm-0">
+				    <a href="{% url 'nt_training:ntSessionEdit' object.pk %}" class="btn btn-secondary btn-lg"><i class="fa fa-fw fa-lg fa-pencil"></i> <span class="d-sm-none d-lg-inline">Edit</span></a>
+				  </div>
+				{% endif %}
+			</div>
+		</div>
+		<div class="card-body">
+			<div class="row mb-4">
+				<div class="col">
+					<div class="card">
+						<div class="card-header bg-primary">
+							<h4><i class="fa fa-fw fa-info nt-orange"></i> Session Info</h4>
+						</div>
+						<div class="card-body">
+							<div class="row text-center text-sm-left">
+								<div class="col-12 col-sm-6">
+									<h5>Trained by: <a href="{% url 'nt_training:ntPerson' object.trainer.slug %}">{{ object.trainer }}</a></h5>
+								</div>
+								<div class="col-12 col-sm-6 text-md-right">
+									<h5>Date: {{ object.date }}</h5>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mb-4">
+				<div class="col">
+					<div class="card">
+						<div class="card-header bg-primary">
+							<h4><i class="fa fa-fw fa-list nt-orange"></i> Training Points</h4>
+						</div>
+						<div class="card-body">
+							{% training_cards session_boxes=object.trainingId.all %}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header bg-primary">
+							<h4><i class="fa fa-fw fa-users nt-orange"></i> People Trained</h4>
+						</div>
+						<div class="card-body">
+								<!-- Need to organise this vertically rather than horizontally -->
+								{% with object.trainee.all as people %}
+									{% include 'nt_training/include/people-list.html' %}
+								{% endwith %}
+								
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

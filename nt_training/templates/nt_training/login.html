@@ -1,0 +1,49 @@
+{% extends 'nt_training/base.html' %}
+{% load widget_tweaks %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+	{% if user.is_authenticated %}
+		<div class="alert alert-warning text-center" role="alert">
+			<p><i class="fa fa-fw fa-exclamation-circle"></i> You are already logged in. Try going to the <a href="{% url 'nt_training:ntHome' %}" class="alert-link">home page</a> instead. Or, <a href="{% url 'nt_training:ntLogout' %}" class="alert-link">logout</a>.</p>
+			<p>You may have come to this page in error, or because your account does not have the privileges to do whatever it is you just tried.</p>
+		</div>
+	{% else %}
+		<h1 class="text-center">Login</h1>
+		{% if form.errors %}
+			<div class="row">
+				<div class="alert alert-danger col-8 mx-auto" role="alert"><i class="fa fa-exclamation fa-fw"></i> Incorrect username or password. Please try again.</div>
+			</div>
+		{% endif %}
+		{% if next %} 
+			{% if "edit" in next or "new" in next %}
+				<div class="row">
+					<div class="alert alert-warning col-8 mx-auto" role="alert"><i class="fa fa-info fa-fw"></i> You need to log in to do that. Accounts are available to New Theatre technical committee.</div>
+				</div>
+			{% endif %}
+		{% endif %}
+		{# Actual login form #}
+		<div class="row">
+			<div class="col">
+				<form method="post" action="{% url 'nt_training:ntLogin' %}">
+					{% csrf_token %}
+					{% for field in form %}
+						<div class="row form-group">
+							<div class="col-lg-8 col-sm-10 col-12 mx-auto">
+								<div class="text-left text-primary">{{ field.label_tag|title }}</div>
+								{% render_field field class+="form-control" placeholder+=field.label %}
+							</div>
+						</div>
+					{% endfor %}
+					<div class="row">
+						<div class="col-12 col-sm-10 col-lg-8 mx-auto">
+							<button type="submit" value="login" class="btn btn-primary btn-lg btn-block">Login</button>
+							<input type="hidden" name="next" value="{{ next }}" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}
+

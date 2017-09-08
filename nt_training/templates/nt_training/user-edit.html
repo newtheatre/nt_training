@@ -1,0 +1,43 @@
+{% extends 'nt_training/base.html' %}
+{% load widget_tweaks %}
+{% block title %}Edit your profile{% endblock %}
+
+{% block content %}
+	<h1 class="text-center">Edit your profile</h1>
+	{% if form.errors %}
+		{% for field in form %}
+			{% for error in field.errors %}
+				<div class="row justify-content-center">
+					<div class="alert alert-danger col-md-10 col" role="alert"><i class="fa fa-exclamation fa-fw"></i> {{ error|escape }}</div>
+				</div>
+			{% endfor %}	
+		{% endfor %}
+	{% endif %}
+	{% if success == True %}
+		<div class="row justify-content-center">
+			<div class="alert alert-success col-md-10 col-12" role="alert"><i class="fa fa-info-circle"></i> Password changed successfully.</div>
+		</div>
+	{% endif %}
+	<div class="row justify-content-center">
+		<div class="col">
+			<form method="post">
+				{% csrf_token %}
+				{% for field in form %}
+					<div class="row form-group justify-content-center">
+						<div class="col-lg-8 col-sm-10 col-12 mx-auto">
+							<div class="text-left text-primary">{{ field.help_text|safe }}</div>
+							<div class="text-left text-primary">{{ field.label_tag|title }}</div>
+							{% render_field field class+="form-control" placeholder+=field.label %}
+						</div>
+					</div>
+				{% endfor %}
+				<div class="row">
+					<div class="col-lg-8 col-sm-10 col-12 mx-auto">
+						<button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock %}
+

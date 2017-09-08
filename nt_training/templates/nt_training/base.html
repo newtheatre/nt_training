@@ -1,0 +1,234 @@
+{% load static %}
+{% load nt_navbar %}
+
+<!DOCTYPE html>
+<html>
+	<!-- <head> section of pages -->
+	<head> 
+	  <meta charset="utf-8">
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>{% block title %}Title{% endblock %} | NNT Training</title>
+
+		<!-- Popper.js (for Bootstrap 4) -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
+		<!-- JQuery -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+		<!-- Font Awesome Extension -->
+		<link rel="stylesheet" href="{% static 'nt_training/fae/fae.css' %}">
+
+		<!-- Training CSS -->
+		<link rel="stylesheet" href="{% static 'nt_training/css/screen.css' %}">
+		<!-- <link rel="stylesheet" href="{% static 'nt_training/css/print.css' %}"> -->
+
+	</head>
+	<body>
+		<!-- Nav bar -->
+		<nav class="navbar navbar-expand-md navbar-dark navbar-static-top mb-4">
+		  <div class="container">
+		  	<div class="col col-md-4">
+		      <a class="navbar-brand" href="{% url 'nt_training:ntHome' %}" style="height:auto">
+		        <img src="http://newtheatre.org.uk/wp-content/themes/nnt-wordpress-theme/img/logo-web.png" />
+		      </a>
+				  <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+				    <span class="navbar-toggler-icon"></span>
+				  </button>
+		    </div>
+		    <div id="navbar" class="collapse navbar-collapse justify-content-end">
+		      <!-- Login buttons and dropdown --> 
+		      <ul class="navbar-nav order-md-2 ml-0">
+		      	{% if user.is_authenticated %}
+		      	<div class="dropdown">
+		      		<li class="nav-item">
+		      			<a href="#" class="dropdown-toggle nav-item nav-link" data-toggle="dropdown">Hi, {% if user.first_name %}{{ user.first_name|title }}{% else %}{{ user|title }}{% endif %}. <i class="caret"></i></a>
+		      			<ul class="dropdown-menu">
+		      				{% if user.is_staff %}
+		      					<li><a href="/admin" class="dropdown-item">Admin</a></li>
+		      				{% endif %}
+		      				<li><a href="{% url 'nt_training:ntUserEdit' %}" class="dropdown-item">Change password</a></li>
+		      				<li><a href="{% url 'nt_training:ntLogout' %}" class="dropdown-item">Logout</a></li>
+		      			</ul>
+		      		</li>
+		      	</div>
+		      	{% else %}
+		      		<li class="nav-item"><a href="{% url 'nt_training:ntLogin' %}?next={{ request.path }}" class="nav-link">Login</a></li>
+		      	{% endif %}
+		      </ul>
+		      <!-- Actual navbar buttons -->
+		      <ul class="navbar-nav order-md-1 mr-md-auto pl-md-4">
+		      	{% nav_items %}
+		      </ul>
+		    </div><!--/.nav-collapse -->
+		  </div>
+		</nav>	
+		<!-- End nav bar -->
+
+		<div class="container">
+			{% for message in messages %}
+				<div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %} alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					{% if message.tags == 'alert' %}<i class="fa fa-fw fa-exclamation-circle"></i>&nbsp;
+					{% else %}<i class="fa fa-fw fa-info-circle"></i>&nbsp;
+					{% endif %}
+					{{ message }}
+				</div>
+			{% endfor %}
+			<br />
+			{% block content %}
+				<p>No content defined.</p>
+			{% endblock %}
+		</div>
+
+		<!-- Footer -->
+		<div class="container">
+			<hr>
+			<div class="row">
+				<div class="col">
+					<p class="text-center"><small class="text-muted">&copy; 2017 <a href="http://newtheatre.org.uk" class="nocolor clickme">Nottingham New Theatre</a></small></p>
+				</div>
+			</div>
+		</div>
+		<!-- End footer -->
+
+		<!-- Javascript -->
+
+			<!-- Font Awesome -->
+			<script src="https://use.fontawesome.com/e0914bf44d.js"></script>
+
+			<!-- Bootstrap Opt-ins -->
+			<script>
+				$(function () {
+			  	$('[data-toggle="tooltip"]').tooltip() // Enable Boostrap tooltips
+				});
+			</script>
+
+			<!-- Filtering of people -->
+			<script>
+				$(document).ready(function () { // Filter buttons
+					$('.btn-filter').on('click', function() {
+					  if (this.id == 'clear') {
+					    $('#peopleList > div').removeClass('d-none');
+					    $('#peopleList > div.clearfixjs').addClass('clearfix');
+					  } 
+					  else {
+					    var $el = $('.person-' + this.id).removeClass('d-none');
+					    $('#peopleList > div').not($el).addClass('d-none');
+					    $('#peopleList > div.clearfixjs').removeClass('clearfix');
+					  }
+					  $('.btn-filter').removeClass('active');
+					  $(this).addClass('active');
+					})
+				});
+
+				$(document).ready(function () {
+					var $searchBox = $('#people-search');
+					var $userDivs = $('#peopleList > div');
+
+					$searchBox.on('input', function() {
+					  var scope = this;
+					  if (!scope.value || scope.value == '') {
+					    $userDivs.show();
+					    $('#peopleList > div.clearfixjs').addClass('clearfix');
+					    return;
+					  }
+					  $userDivs.each(function(i, div) {
+					    var $div = $(div);
+					    $div.toggle($div.text().toLowerCase().indexOf(scope.value.toLowerCase()) > -1);
+					    $('#peopleList > div.clearfixjs').removeClass('clearfix');
+					  })
+					});
+				})
+
+			</script>
+
+			<!-- Card collapse icon toggling -->
+			<script>
+				$(document).ready(function () { // When we expand a Card, change the icon like magic
+				    $("a.collapsea").click(function () {
+				        $(this).find(".fa").toggleClass("fa-chevron-down").toggleClass("fa-chevron-up");
+				    });
+				});
+			</script>
+
+			<!-- Expand hidden card rows --> 
+			<script>
+				$(document).ready(function () { // When expand is clicked, this card's hidden rows are unhidden
+				    $(".expandPanel").click(function () {
+				    		var dept = $(this).attr('ID') // Get card
+				    		var deptClass = dept.replace("expand-",""); // Get dept
+				        $(".table-danger."+deptClass).toggleClass("d-none"); // Change class
+								$(this).find('#'+deptClass+'-fa').toggleClass("fa-expand").toggleClass("fa-compress");
+				    });
+				});
+			</script>
+
+			<!-- Form: Clear input buttons -->
+			<script>
+				$(document).ready(function () {
+					$("#trainingPointsClear").click(function () {
+						$('input[id^="id_trainingId_"]:checked').prop('checked',false);
+					});
+					$("#traineesClear").click(function () {
+						$('input[id^="id_trainee_"]:checked').prop('checked',false);
+						$(".button-checkbox.active").removeClass("active"); // Remove .active class 
+						$(".button-checkbox-icon.fa-check-circle-o").toggleClass("fa-check-circle-o").toggleClass("fa-circle-o");; // Remove .active class 
+					});
+				});
+			</script>
+			<!-- Form: Select all for a category -->
+			<script>
+				$(document).ready(function (){
+					var isChecked = false; // Set up for toggling
+					$('[id^="selectAll"]').click(function (){ //Get the button
+						var dept = $(this).attr('ID');
+						var deptCheckboxes = dept.replace("selectAll",".checkbox"); // Change the class prefix
+						if (isChecked == false) { // Logic enables toggling, rather than just selecting
+							$(deptCheckboxes).prop('checked',true);
+							isChecked = true;
+						}
+						else { 
+							$(deptCheckboxes).prop('checked',false);
+							isChecked = false;
+						}
+					});
+				});
+			</script>
+			<!-- Form: Use .active instead of checkbox checked -->
+			<script>
+				$(document).ready(function () { 
+					// Go through and add .active to the initially checked boxes 
+					checkboxes = document.getElementsByName("trainee");
+					checkedboxes = [];
+					for (var i=0; i<checkboxes.length; i++){
+						if (checkboxes[i].checked) {
+							checkedboxes.push(checkboxes[i]);
+							$(checkboxes[i]).closest(".button-checkbox").addClass('active');
+							$(checkboxes[i]).closest(".person-checkbox").nextAll(".button-checkbox-icon").addClass("fa-check-circle-o").removeClass("fa-circle-o");
+						}
+					}
+				});
+			</script>
+			<script>
+				$('input[name="trainee"]').change(function(){
+					// Add .active when the checked status changes 
+				    if($(this).is(':checked')) {
+				    	// Box gets checked
+				      $(this).closest(".button-checkbox").addClass('active');
+				      $(this).closest(".person-checkbox").nextAll(".fa-circle-o").toggleClass("fa-check-circle-o").toggleClass("fa-circle-o");
+				    } else {
+				    	// Unchecked 
+				      $(this).closest(".button-checkbox").removeClass('active');
+				      $(this).closest(".person-checkbox").nextAll(".fa-check-circle-o").toggleClass("fa-check-circle-o").toggleClass("fa-circle-o");
+				    }
+				});
+			</script>
+		<!-- End Javascript -->
+
+	</body>
+</html>
+

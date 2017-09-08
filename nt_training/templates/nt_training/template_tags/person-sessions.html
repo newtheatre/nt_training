@@ -1,0 +1,6 @@
+		{% for sesh in sessions %}
+			<p>{{ sesh.trainer }} trained {% for trainee in sesh.trainee.all %}{{ trainee }} {% endfor %} on 
+			{% for id in sesh.trainingId.all %}
+				{{ id.category }}
+			{% endfor %}</p>
+		{% endfor %}

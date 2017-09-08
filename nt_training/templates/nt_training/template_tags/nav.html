@@ -1,0 +1,10 @@
+					{% spaceless %}
+	        {% for item in items %}
+	        	{% if item.viewName %}
+	        	{# Ensure URL lookups don't fail by verifying they exist first #}
+		        	{% with 'nt_training:'|add:item.viewName as urlview %}
+		        		<li class="nav-item"><a href="{% url urlview %}" class="nav-link">{{ item.iconName }}</a></li>
+		        	{% endwith %}
+	        	{% endif %}
+	        {% endfor %}
+	        {% endspaceless %}

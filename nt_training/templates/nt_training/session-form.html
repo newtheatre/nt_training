@@ -1,0 +1,107 @@
+{% extends 'nt_training/base.html' %}
+{% load nt_navbar %}
+{% load nt_spec %}
+{% load nt_people %}
+{% load nt_filters %}
+{% load widget_tweaks %}
+{% block title %}{% if object.pk %}Edit{%else%}Add{%endif%} Session{% endblock %}
+
+{% block content %}
+{% for field in form %}
+	{% if field.errors %}
+		<div class="alert alert-danger alert-dismissable" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<i class="fa fa-fw fa-exclamation-circle"></i> <strong>{{ field.label_tag|title }}</strong> 
+			{{ field.errors|last }} {# Use defined validation error, not Django's #}</div>
+	{% endif %}
+{% endfor %} 
+
+<form role="form" method="POST" class="form-inline">
+	{% csrf_token %}
+	<div class="card">
+		<div class="card-header bg-primary">
+			<div class="row">
+				<div class="col-sm-3 col-12 my-2 my-sm-0 text-center text-sm-left">
+					<a href="{% if object.pk %}{% url 'nt_training:ntSessionSingle' object.pk %}{% else %}{% url 'nt_training:ntSessions' %}{% endif %}" class="btn btn-secondary btn-lg"><i class="fa fa-fw fa-lg fa-arrow-left"></i> <span class="d-sm-none d-lg-inline">Cancel</span></a>
+				</div>
+				<div class="col-sm-6 col-12 text-center mt-1">
+					<h3 class="text-center mt-1">{% if object.pk %}Edit{%else%}New{%endif%} Training Session {{ object.pk }}</h3>
+				</div>
+				<div class="col-sm-3 col-12 text-center text-sm-right my-2 my-sm-0">
+					<button class="btn btn-lg btn-secondary" role="button" type="submit"><i class="fa fa-fw fa-check"></i> <span class="d-sm-none d-lg-inline">Submit</span></button>
+				</div>
+			</div>
+		</div>
+		<div class="card-body">
+			<div class="row mb-4">
+				<div class="col">
+					<div class="card">
+						<div class="card-header bg-primary">
+							<h4><i class="fa fa-fw fa-info nt-orange"></i> Session Info</h4>
+						</div>
+						<div class="card-body">
+							<div class="row text-center text-sm-left">
+								<div class="col-12 col-sm-6">
+									<h5>Trained by: <span class="small">{% render_field form.trainer class+="custom-select" %}</span></h5>
+								</div>
+								<div class="col-12 col-sm-6 text-md-right">
+									<h5>Date: {% render_field form.date class+="form-control" %}</h5>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mb-4">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header bg-primary">
+							<span class="h4"><i class="fa fa-fw fa-list nt-orange"></i> Training Points</span>
+							<a class="btn btn-danger float-sm-right" id="trainingPointsClear"><i class="fa fa-times-circle fa-fw"></i>&nbsp;Clear <span class="d-none d-md-inline">Selection</span></a>
+						</div>
+						<div class="card-body">
+							{% training_cards form=form %}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header bg-primary">
+							<div class="row">
+								<div class="col-8">
+									<h4><i class="fa fa-fw fa-users nt-orange"></i> People Trained</h4>
+								</div>
+								<div class="col-4">
+									<a class="btn btn-danger pull-right" id="traineesClear"><i class="fa fa-times-circle fa-fw"></i>&nbsp;Clear <span class="d-none d-md-inline">Selection</span></a>
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="col-12">
+								<!-- Need to organise this vertically rather than horizontally -->
+								{% all_people as people %}
+
+								{% include 'nt_training/include/people-list.html' %}
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card-footer bg-primary">
+			<div class="row">
+				<div class="col-sm-8 col-4">
+					<a href="{% url 'nt_training:ntSessions' %}" class="btn btn-secondary btn-lg"><i class="fa fa-fw fa-lg fa-list"></i> <span class="d-none d-sm-inline">Back to all sessions</span></a>
+				</div>
+				<div class="col-sm-4 col-8 text-right">
+					<button class="btn btn-lg btn-secondary" style="white-space:nowrap;" role="button" type="submit"><i class="fa fa-fw fa-check"></i> Submit</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+{% endblock %}
