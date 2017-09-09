@@ -41,7 +41,7 @@ At this point you can check the Python version by running `python --version`.
 cd <dir>
 pip install -r requirements.txt 
 ```
-
+Ubuntu-based users may also need to run `sudo apt install libpq-dev python3-dev`
 #### Run the server 
 ```
 python manage.py runserver 
