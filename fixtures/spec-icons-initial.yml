@@ -1,0 +1,607 @@
+[
+{
+  "model": "nt_training.icon",
+  "pk": 1,
+  "fields": {
+    "itemType": "CAT",
+    "iconRef": "lightbulb-o",
+    "iconName": "Lighting",
+    "weight": 2,
+    "primary": false,
+    "description": "Basic and advanced skills great for any budding lighting designer to have a good grasp of.",
+    "viewName": null
+  }
+},
+{
+  "model": "nt_training.icon",
+  "pk": 3,
+  "fields": {
+    "itemType": "CAT",
+    "iconRef": "headphones",
+    "iconName": "Sound",
+    "weight": 3,
+    "primary": false,
+    "description": "Interested in working in sound? You'll want to get these under your belt.",
+    "viewName": null
+  }
+},
+{
+  "model": "nt_training.icon",
+  "pk": 4,
+  "fields": {
+    "itemType": "CAT",
+    "iconRef": "list-ol",
+    "iconName": "Basics",
+    "weight": 1,
+    "primary": false,
+    "description": "Your tech 'bread and butter' - get these ticked off and you'll be a great help to any show.",
+    "viewName": null
+  }
+},
+{
+  "model": "nt_training.icon",
+  "pk": 5,
+  "fields": {
+    "itemType": "CAT",
+    "iconRef": "video-camera",
+    "iconName": "Video",
+    "weight": 4,
+    "primary": false,
+    "description": "Everything the New Theatre does in video, both In-House and Fringe shows.",
+    "viewName": null
+  }
+},
+{
+  "model": "nt_training.icon",
+  "pk": 7,
+  "fields": {
+    "itemType": "PAGE",
+    "iconRef": "id-card",
+    "iconName": "Training",
+    "weight": 2,
+    "primary": true,
+    "description": "All of the training we offer, arranged by the department category it's part of.\r\n\r\nWhether you're interested in a specific area of theatre (sound, lighting, video, etc.); want to look into being the technical director of a show; or just want to see how easy it is to get involved, this is the place to go.",
+    "viewName": "ntCategory"
+  }
+},
+{
+  "model": "nt_training.icon",
+  "pk": 9,
+  "fields": {
+    "itemType": "PAGE",
+    "iconRef": "users",
+    "iconName": "People",
+    "weight": 3,
+    "primary": true,
+    "description": "Take a look through the training records for each individual registered with us. \r\n        \r\nWe've had many people come through the doors of the tech box and never look back -- take a look at them here. \r\n\r\nOr, look yourself up to see how you're getting on with tech at NNT. Someone missing? Get in touch.",
+    "viewName": "ntPeople"
+  }
+},
+{
+  "model": "nt_training.icon",
+  "pk": 10,
+  "fields": {
+    "itemType": "PAGE",
+    "iconRef": "question",
+    "iconName": "About",
+    "weight": 5,
+    "primary": false,
+    "description": "about",
+    "viewName": "ntAbout"
+  }
+},
+{
+  "model": "nt_training.icon",
+  "pk": 11,
+  "fields": {
+    "itemType": "PAGE",
+    "iconRef": "list",
+    "iconName": "Sessions",
+    "weight": 4,
+    "primary": false,
+    "description": "sessions",
+    "viewName": "ntSessions"
+  }
+},
+{
+  "model": "nt_training.icon",
+  "pk": 12,
+  "fields": {
+    "itemType": "CAT",
+    "iconRef": "plus-square-o",
+    "iconName": "Studio A",
+    "weight": 7,
+    "primary": false,
+    "description": "Training associated with doing shows in New Theatre Studio A",
+    "viewName": null
+  }
+},
+{
+  "model": "nt_training.icon",
+  "pk": 13,
+  "fields": {
+    "itemType": "CAT",
+    "iconRef": "user",
+    "iconName": "Technical Director",
+    "weight": 5,
+    "primary": false,
+    "description": "Training points related to being a Technical Director of an In-House show",
+    "viewName": null
+  }
+},
+{
+  "model": "nt_training.icon",
+  "pk": 14,
+  "fields": {
+    "itemType": "CAT",
+    "iconRef": "bolt",
+    "iconName": "Power",
+    "weight": 6,
+    "primary": false,
+    "description": "Detailed technical aspects of power theory and safety.",
+    "viewName": null
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 5,
+  "fields": {
+    "trainingId": "1.01",
+    "category": 4,
+    "trainingTitle": "Recognition / Storage of Fixtures",
+    "description": "Understanding of how the tech store is laid out.",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 6,
+  "fields": {
+    "trainingId": "1.02",
+    "category": 4,
+    "trainingTitle": "Coiling and Storage of Cables",
+    "description": "How to coil cables, and where the different cable types live.",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 7,
+  "fields": {
+    "trainingId": "1.03",
+    "category": 4,
+    "trainingTitle": "Ladder Safety",
+    "description": "How to set up and use a ladder.",
+    "safety": true
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 8,
+  "fields": {
+    "trainingId": "1.04",
+    "category": 4,
+    "trainingTitle": "Cutting and Labelling of Gels",
+    "description": "How to cut and label gels, and where the different gels live in the tech store.",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 9,
+  "fields": {
+    "trainingId": "1.05",
+    "category": 4,
+    "trainingTitle": "Rigging of Fixtures",
+    "description": "How to rig and de-rig our different lighting fixtures, and the differences between them.",
+    "safety": true
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 10,
+  "fields": {
+    "trainingId": "1.06",
+    "category": 4,
+    "trainingTitle": "T-Bar Setup",
+    "description": "How to set up a lighting stand with a t-bar for safe use with fixtures (etc.).",
+    "safety": true
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 11,
+  "fields": {
+    "trainingId": "1.07",
+    "category": 4,
+    "trainingTitle": "Running of Cables",
+    "description": "How to run cables along both lighting bars and the ground safely.",
+    "safety": true
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 12,
+  "fields": {
+    "trainingId": "1.08",
+    "category": 4,
+    "trainingTitle": "Use of Dimmers",
+    "description": "Correct turn-on and turn-off procedure of the auditorium dimmers.",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 13,
+  "fields": {
+    "trainingId": "1.09",
+    "category": 4,
+    "trainingTitle": "Operating Basics",
+    "description": "How to operate the sound and lighting desks, and QLab (Auditorium) under instruction of a Technical Director.",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 14,
+  "fields": {
+    "trainingId": "1.10",
+    "category": 4,
+    "trainingTitle": "Focusing Lights",
+    "description": "Basics of how to focus a lighting fixture, under supervision.",
+    "safety": true
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 15,
+  "fields": {
+    "trainingId": "2.01",
+    "category": 1,
+    "trainingTitle": "Supervising Rigging",
+    "description": "Unknown",
+    "safety": true
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 16,
+  "fields": {
+    "trainingId": "2.02",
+    "category": 1,
+    "trainingTitle": "Programming Ion",
+    "description": "A comprehensive understanding of how to program an in-house show on our lighting desk. This will include understanding what part cues, magic sheets, groups, palettes and effects are - even if not all have been used.",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 17,
+  "fields": {
+    "trainingId": "2.03",
+    "category": 1,
+    "trainingTitle": "Setting up Intelligent Fixtures",
+    "description": "Navigating through the menus of the intelligent (LED) fixtures to set addresses, etc.\r\nRigging, powering and sending data to intelligent fixtures.",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 18,
+  "fields": {
+    "trainingId": "2.04",
+    "category": 1,
+    "trainingTitle": "Programming Intelligent Fixtures",
+    "description": "Patching and manipulating intelligent fixtures on the lighting desk - changing the intensity, colour, and incorporating this into cues.",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 19,
+  "fields": {
+    "trainingId": "2.05",
+    "category": 1,
+    "trainingTitle": "Dimmed Fixtures",
+    "description": "Understanding of the features of a generic dimmed lighting fixture: where the lamp is; manipulating shutters/barn doors; basic troubleshooting and maintenance.",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 20,
+  "fields": {
+    "trainingId": "2.06",
+    "category": 1,
+    "trainingTitle": "Smoke/Haze",
+    "description": "Set up and use of the smoke and haze machines. Includes understanding of the safety factors associated with each.",
+    "safety": true
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 21,
+  "fields": {
+    "trainingId": "3.01",
+    "category": 3,
+    "trainingTitle": "Microphones",
+    "description": "Use of microphones and cables, including use of the stage wing multicores.",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 22,
+  "fields": {
+    "trainingId": "3.02",
+    "category": 3,
+    "trainingTitle": "Advanced QLab Audio",
+    "description": "Programming QLab with fades; groups; follows; and using multiple speakers within the auditorium.",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 23,
+  "fields": {
+    "trainingId": "3.03",
+    "category": 3,
+    "trainingTitle": "Advanced Sound Desk",
+    "description": "Using multiple mixes on the sound desk for different purposes; using microphones, effects or EQ on the sound desk.",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 24,
+  "fields": {
+    "trainingId": "7.01",
+    "category": 12,
+    "trainingTitle": "Setup Power",
+    "description": "Understanding how the dimmers work in Studio A",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 25,
+  "fields": {
+    "trainingId": "7.02",
+    "category": 12,
+    "trainingTitle": "Setup Sound",
+    "description": "Understanding how the powered speakers and patch points work in Studio A",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 26,
+  "fields": {
+    "trainingId": "7.03",
+    "category": 12,
+    "trainingTitle": "Setup Lighting",
+    "description": "Understanding of how the lighting rig is set up, and be able to set up the Nomad lighting desk",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 27,
+  "fields": {
+    "trainingId": "7.04",
+    "category": 12,
+    "trainingTitle": "Using Nomad",
+    "description": "Understanding how to use the Nomad lighting desk and the differences with the Ion\r\n(As the Nomad and Ion use the same ETC Eos software, programming is trained within the Lighting section)",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 28,
+  "fields": {
+    "trainingId": "7.05",
+    "category": 12,
+    "trainingTitle": "Powering on and off",
+    "description": "Powering on and off the Studio, in the correct order and in a safe fashion.",
+    "safety": true
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 29,
+  "fields": {
+    "trainingId": "5.01",
+    "category": 13,
+    "trainingTitle": "Powering on and off",
+    "description": "Powering the auditorium tech equipment on and off (tech box and dimmers)",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 30,
+  "fields": {
+    "trainingId": "5.02",
+    "category": 13,
+    "trainingTitle": "Basic Lighting Desk",
+    "description": "A basic understanding of how to program an in-house show on our lighting desk. This will include recording and updating cues involving dimmed fixtures.",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 31,
+  "fields": {
+    "trainingId": "5.03",
+    "category": 13,
+    "trainingTitle": "Basic Sound Desk",
+    "description": "How to set levels; an understanding of the default setup of the sound desk.",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 32,
+  "fields": {
+    "trainingId": "5.04",
+    "category": 13,
+    "trainingTitle": "Basic QLab",
+    "description": "How to place an audio file in QLab and make noise come out of different speakers.",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 33,
+  "fields": {
+    "trainingId": "5.05",
+    "category": 13,
+    "trainingTitle": "Recording Audio",
+    "description": "How to record audio using Audacity and the sound card; and how to make this work in QLab.",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 34,
+  "fields": {
+    "trainingId": "5.06",
+    "category": 13,
+    "trainingTitle": "Emergency Procedure",
+    "description": "When to use the emergency procedure, and what it should involve for specific shows.\r\nUnderstanding what the TD's responsibilities are in an emergency situation.",
+    "safety": true
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 35,
+  "fields": {
+    "trainingId": "4.01",
+    "category": 5,
+    "trainingTitle": "Projector Setup",
+    "description": "Powering, focusing, and sending video data to a projector.",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 36,
+  "fields": {
+    "trainingId": "4.02",
+    "category": 5,
+    "trainingTitle": "Rigging of Projectors",
+    "description": "Safe rigging of a projector using the appropriate rigging hardware.",
+    "safety": true
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 37,
+  "fields": {
+    "trainingId": "4.03",
+    "category": 5,
+    "trainingTitle": "Cabling, Signal Types and Adaptors",
+    "description": "Understanding of different types of video cable and protocol, and how to get to and from projectors and computers.",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 38,
+  "fields": {
+    "trainingId": "4.04",
+    "category": 5,
+    "trainingTitle": "Basic QLab Video",
+    "description": "Getting video to come out of a projector with QLab.",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 39,
+  "fields": {
+    "trainingId": "4.05",
+    "category": 5,
+    "trainingTitle": "Advanced QLab Video",
+    "description": "Advanced QLab video techniques - understanding to use some of: multiple surfaces, surface geometry, and geometric effects or fades.",
+    "safety": false
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 40,
+  "fields": {
+    "trainingId": "6.01",
+    "category": 14,
+    "trainingTitle": "RCDs and MCBs",
+    "description": "What they are, the differences between them, and why and when each is used.",
+    "safety": true
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 41,
+  "fields": {
+    "trainingId": "6.02",
+    "category": 14,
+    "trainingTitle": "Use of fixed dimmers",
+    "description": "Unknown",
+    "safety": true
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 42,
+  "fields": {
+    "trainingId": "6.03",
+    "category": 14,
+    "trainingTitle": "Use of Smartpack",
+    "description": "Setup and use of the ETC Smartpack portable dimmer; how and when to use the associated power adaptors.",
+    "safety": true
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 43,
+  "fields": {
+    "trainingId": "6.04",
+    "category": 14,
+    "trainingTitle": "Cable & Fixture Maintenance",
+    "description": "Opening, repairing and PAT testing lighting fixtures and power cables.\r\nLighting fixture maintenance relates to the electrical components only.",
+    "safety": true
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 44,
+  "fields": {
+    "trainingId": "6.05",
+    "category": 14,
+    "trainingTitle": "Making Cables",
+    "description": "Safe and correct procedures in making power cables.",
+    "safety": true
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 45,
+  "fields": {
+    "trainingId": "6.06",
+    "category": 14,
+    "trainingTitle": "3-Phase Power",
+    "description": "Safe use of 3-phase power cables. Why, how and when they are used. (Both New Theatre Auditorium and New Theatre Studio A.)",
+    "safety": true
+  }
+},
+{
+  "model": "nt_training.training_spec",
+  "pk": 46,
+  "fields": {
+    "trainingId": "1.99",
+    "category": 4,
+    "trainingTitle": "Unused training",
+    "description": "Used for testing purposes only.",
+    "safety": false
+  }
+}
+]
