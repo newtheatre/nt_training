@@ -13,8 +13,11 @@
 		<p class="text-center">Can't see your name? Drop the <a href="mailto:ctd@newtheatre.org.uk">Company Technical Director an email</a> to get started. <br />
 	</div>
 </div>
-
-{% include 'nt_training/include/people-list.html' %}
+{% if people is None %}
+	<p class="text-center text-muted"><i class="fa fa-info-circle fa-fw"></i>&nbsp; There aren't any people.</p>
+{% else %}
+	{% include 'nt_training/include/people-list.html' %}	
+{% endif %}
 
 {% endblock %}
 
