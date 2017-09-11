@@ -102,7 +102,7 @@ From nt_spec.py:
 							        	<h4 class="modal-title">{% if item.safety == True %}<i class="fa fa-exclamation-circle text-danger" aria-label="Exclamation point" title="Safety critical"></i>&nbsp;{% endif %}{{ item.trainingId }} &ndash; {{ item.trainingTitle }}</h4>
 							      	</div>
 							      	<div class="modal-body">
-							      		{{ item.description }}
+							      		{{ item.description|linebreaks }}
 							      		<hr>
 												{% id_people item.pk as people %}
 												<!-- Trainers -->
