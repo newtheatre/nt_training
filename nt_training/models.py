@@ -48,7 +48,7 @@ class Person(models.Model):
 	email = models.EmailField(
 		null=True,
 		# default=None,
-	# 	blank=True,
+	 	blank=True,
 	)
 	status = models.CharField(
 		max_length = 15,
