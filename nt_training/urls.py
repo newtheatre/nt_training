@@ -29,7 +29,7 @@ urlpatterns = [
 	#/training
 	url(r'^training/$', views.TrainingView.as_view(), name='ntCategory'),
 	#/training/id
-	url(r'^training/(?P<trainingId>[0-9]+)/$', views.TrainingIdView.as_view(), name='ntTrainingId'),
+	url(r'^training/(?P<pk>[0-9]+)/$', views.TrainingDetailView.as_view(), name='ntTrainingDetail'),
 
 	# Training Session Views
 	#/training/session (List view)

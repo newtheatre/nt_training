@@ -70,7 +70,7 @@ From nt_spec.py:
 						{% if item.category == dept %}
 							<tr class="
 								{{ dept|slugify }} 
-								{% if card_settings.modals == True %}clickme{% endif %} 
+								{% if card_settings.modals == True %}clickme modal-href{% endif %} 
 								{% if card_settings.colour_bands == True %}
 									{% if item.trainingId in person_achieved_points or item in session_boxes %}
 										table-success
@@ -78,9 +78,7 @@ From nt_spec.py:
 										table-danger d-none
 									{% endif %}
 								{% endif %}"
-								{% if card_settings.modals == True %}
-									data-toggle="modal" data-target="#{{item.pk}}-Modal"
-								{% endif %}>
+								id="{{item.pk}}">								
 								<td>
 									{% if card_settings.checkboxes == True %}
 										<input type="checkbox" name="trainingId" value="{{ item.pk }}" id="id_trainingId_{{ forloop.counter }}" class="form-controls checkbox-{{dept|slugify}}"
@@ -93,38 +91,6 @@ From nt_spec.py:
 								</td>
 								<td {% if card_settings.modals == True %}class="underhover"{% endif %}>{% if item.safety == True %}<i class="fa fa-exclamation-circle text-danger" aria-label="Exclamation point" title="Safety critical"></i>&nbsp;{% endif %}{{ item.trainingTitle }}</td>
 							</tr>
-							{% if card_settings.modals == True %}
-								{# Don't show the modal if we're editing a training session #}
-								<div class="modal fade" id="{{item.pk}}-Modal" tabindex="-1" role="dialog" aria-labelledby="{{item.trainingId}}">
-									<div class="modal-dialog modal-lg" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-							        	<h4 class="modal-title">{% if item.safety == True %}<i class="fa fa-exclamation-circle text-danger" aria-label="Exclamation point" title="Safety critical"></i>&nbsp;{% endif %}{{ item.trainingId }} &ndash; {{ item.trainingTitle }}</h4>
-							      	</div>
-							      	<div class="modal-body">
-							      		{{ item.description|linebreaks }}
-							      		<hr>
-												{% id_people item.pk as people %}
-												<!-- Trainers -->
-												{% if not people.trainers %}
-													<p class="text-muted">This has not been taught by anyone.</p>
-												{% else %}
-													<p>Has been taught by: {% for p in people.trainers %}<a href="{% url 'nt_training:ntPerson' p.slug %}">{{ p|title }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
-												{% endif %}
-							      		<!-- Trainees -->
-												{% if not people.trainees %}
-													<p class="text-muted">This has not been taught to any current student.</p>
-												{% else %}
-												<p>Current students this has been taught to: {% for p in people.trainees %}<a href="{% url 'nt_training:ntPerson' p.slug %}">{{ p|title }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
-												{% endif %}
-							      	</div>
-							      	<div class="modal-footer">
-							      		<button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle-o" aria-hidden="True"></i> Close</button>
-							      	</div>
-							      </div>
-							    </div>
-							  </div>
-						  {% endif %}
 						{% endif %}
 					{% endfor %}
 					{% tech_status person=None dept=dept as status %}
