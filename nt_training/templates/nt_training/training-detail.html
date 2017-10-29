@@ -1,0 +1,61 @@
+{% extends 'nt_training/base.html' %}
+{% block title %}{{ item.trainingTitle }}{% endblock %}
+
+{% load nt_spec %}
+{% load nt_training_sessions %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+{% if request.GET.modal == "True"  %}
+	<div class="modal-dialog modal-lg" role="document" id="modal-content">
+		<div class="modal-content">
+			<div class="modal-header">
+      	<h4 class="modal-title">{% if item.safety == True %}<i class="fa fa-exclamation-circle text-danger" aria-label="Exclamation point" title="Safety critical"></i>&nbsp;{% endif %}{{ item.trainingId }} &ndash; {{ item.trainingTitle }}</h4>
+    	</div>
+    	<div class="modal-body">
+    		{{ item.description|linebreaks }}
+    		<hr>
+				{% id_people item.pk as people %}
+				<!-- Trainers -->
+				{% if not people.trainers %}
+					<p class="text-muted">This has not been taught by anyone.</p>
+				{% else %}
+					<p>Has been taught by: {% for p in people.trainers %}<a href="{% url 'nt_training:ntPerson' p.slug %}">{{ p|title }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
+				{% endif %}
+    		<!-- Trainees -->
+				{% if not people.trainees %}
+					<p class="text-muted">This has not been taught to any current student.</p>
+				{% else %}
+				<p>Current students this has been taught to: {% for p in people.trainees %}<a href="{% url 'nt_training:ntPerson' p.slug %}">{{ p|title }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
+				{% endif %}
+    	</div>
+    	<div class="modal-footer">
+    		<button type="button" class="btn btn-secondary closeModal" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle-o" aria-hidden="True"></i> Close</button>
+    	</div>
+    </div>
+  </div>
+{% else %}
+	<h4>{% if item.safety == True %}<i class="fa fa-exclamation-circle text-danger" aria-label="Exclamation point" title="Safety critical"></i>&nbsp;{% endif %}{{ item.trainingId }} &ndash; {{ item.trainingTitle }}</h4>
+
+	<div class="row">
+		<div class="col">
+			{{ item.description|linebreaks }}
+			<hr>
+			{% id_people item.pk as people %}
+			<!-- Trainers -->
+			{% if not people.trainers %}
+				<p class="text-muted">This has not been taught by anyone.</p>
+			{% else %}
+				<p>Has been taught by: {% for p in people.trainers %}<a href="{% url 'nt_training:ntPerson' p.slug %}">{{ p|title }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
+			{% endif %}
+  		<!-- Trainees -->
+			{% if not people.trainees %}
+				<p class="text-muted">This has not been taught to any current student.</p>
+			{% else %}
+			<p>Current students this has been taught to: {% for p in people.trainees %}<a href="{% url 'nt_training:ntPerson' p.slug %}">{{ p|title }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
+			{% endif %}
+		</div>
+	</div>
+{% endif %}
+{% endblock %}

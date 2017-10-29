@@ -62,9 +62,10 @@ class TrainingView(generic.ListView):
 	template_name = "nt_training/training.html"
 	context_object_name = "training"
 
-class TrainingIdView(generic.DetailView):
-	template_name = "nt_training/training-single.html"
+class TrainingDetailView(generic.DetailView):
+	template_name = "nt_training/training-detail.html"
 	model = Training_Spec
+	context_object_name = "item"
 
 class SessionView(generic.ListView):
 	template_name = "nt_training/session.html"
