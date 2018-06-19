@@ -68,7 +68,7 @@ class Person(models.Model):
 	slug.short_description = "Name"
 	def __str__(self):
 		full_name = self.first_name + ' ' + self.last_name
-		full_name = str.title(full_name)
+		#full_name = str.title(full_name)
 		return full_name
 
 	class Meta:
