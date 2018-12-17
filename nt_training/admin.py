@@ -7,11 +7,11 @@ from django.forms import CheckboxSelectMultiple
 from .models import Icon, Person, Training_Session, Training_Spec
 
 class PersonAdmin(admin.ModelAdmin):
-	fields = ['first_name', 'last_name','slug','email','status','grad_year', 'committee']
+	fields = ['first_name', 'last_name','slug','email','status','grad_year', 'committee', 'is_trainer']
 	prepopulated_fields = {"slug": ("first_name", "last_name",)}
-	list_display = ('slug', 'first_name', 'last_name', 'email','status', 'grad_year', 'committee')
+	list_display = ('slug', 'first_name', 'last_name', 'email','status', 'grad_year', 'committee', 'is_trainer')
 	search_fields = ['first_name', 'last_name', 'grad_year', 'email']
-	list_filter = ['status', 'grad_year', 'committee']
+	list_filter = ['status', 'grad_year', 'committee', 'is_trainer']
 
 	def make_graduated(modeladmin, request, queryset):
 		queryset.update(status='GRAD')
@@ -26,8 +26,15 @@ class PersonAdmin(admin.ModelAdmin):
 			elif person.committee == True:
 				setattr(person, 'committee', False)
 			person.save() 
+	def toggle_trainer(modeladmin, request, queryset):
+		for person in queryset:
+			if person.is_trainer == False:
+				setattr(person, 'is_trainer', True)
+			elif person.is_trainer == True:
+				setattr(person, 'is_trainer', False)
+			person.save() 
 
-	actions = [make_graduated,make_student,make_unknown, toggle_committee]
+	actions = [make_graduated,make_student,make_unknown, toggle_committee, toggle_trainer]
 
 class TrainingSpecAdmin(admin.ModelAdmin):
 	list_filter = ['category']
