@@ -26,6 +26,10 @@ class SessionForm(forms.ModelForm):
 			'trainee': forms.CheckboxSelectMultiple(),
 		}
 
+	def __init__(self, *args, **kwargs):
+		super(SessionForm, self).__init__(*args, **kwargs)
+		self.fields['trainer'].queryset = Person.objects.filter(is_trainer=True)
+
 	def clean(self):
 		trainee = self.cleaned_data.get('trainee')
 		trainingId = self.cleaned_data.get('trainingId')

@@ -60,6 +60,10 @@ class Person(models.Model):
 		null = False,
 		default='UNKNOWN'
 	)
+	is_trainer = models.BooleanField(
+		default=False,
+		help_text="Tick if this person trains others."
+	)
 	slug = models.SlugField(
 		max_length=100,
 		null = True,
