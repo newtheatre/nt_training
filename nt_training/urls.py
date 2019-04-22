@@ -1,6 +1,4 @@
-from django.conf import settings
-from django.conf.urls import include, url
-from django.contrib.auth import views as auth_views
+from django.urls import path
 
 from . import views
 
@@ -9,42 +7,42 @@ urlpatterns = [
 
 	# Authentication
 	#/login
-	url(r'^login/$', views.NTLoginView.as_view(), name='ntLogin'),
+	path('login/', views.NTLoginView.as_view(), name='ntLogin'),
 	#/logout
-	url(r'^logout/$', views.NTLogoutView.as_view(), name='ntLogout'),
+	path('logout/', views.NTLogoutView.as_view(), name='ntLogout'),
 	#/user
-	url(r'^user/done/$', views.NTUserEditDone.as_view(), name='ntUserEditDone'),
-	url(r'^user/$', views.NTUserEdit.as_view(), name='ntUserEdit'),
+	path('user/done/', views.NTUserEditDone.as_view(), name='ntUserEditDone'),
+	path('user/', views.NTUserEdit.as_view(), name='ntUserEdit'),
 
 	#/
-	url(r'^$', views.HomeView.as_view(), name='ntHome'),
+	path('', views.HomeView.as_view(), name='ntHome'),
 
 	# People Views
 	#/people
-	url(r'^people/$', views.PeopleView.as_view(), name='ntPeople'),
+	path('people/', views.PeopleView.as_view(), name='ntPeople'),
 	#/people/slug
-	url(r'^people/(?P<slug>[\w\-]+)/$', views.PersonView.as_view(), name='ntPerson'),
+	path('people/<slug:slug>', views.PersonView.as_view(), name='ntPerson'),
 	
 	# Training Spec Views
 	#/training
-	url(r'^training/$', views.TrainingView.as_view(), name='ntCategory'),
+	path('training/', views.TrainingView.as_view(), name='ntCategory'),
 	#/training/id
-	url(r'^training/(?P<pk>[0-9]+)/$', views.TrainingDetailView.as_view(), name='ntTrainingDetail'),
+	path('training/<int:pk>/', views.TrainingDetailView.as_view(), name='ntTrainingDetail'),
 
 	# Training Session Views
 	#/training/session (List view)
-	url(r'^training/session/$', views.SessionView.as_view(), name='ntSessions'),
+	path('training/session/', views.SessionView.as_view(), name='ntSessions'),
 	#/training/session/id (Single view)
-	url(r'^training/session/(?P<pk>[0-9]+)/$', views.SessionSingleView.as_view(), name='ntSessionSingle'),
+	path('training/session/<int:pk>/', views.SessionSingleView.as_view(), name='ntSessionSingle'),
 	## Login required (handled in views.py)
 	#/training/session/new (Create view)
-	url(r'^training/session/new/$', views.SessionNewView.as_view(), name='ntSessionNew'),
+	path('training/session/new/', views.SessionNewView.as_view(), name='ntSessionNew'),
 	#/training/session/id/edit (Update view)
-	url(r'^training/session/(?P<pk>[0-9]+)/edit/$', views.SessionEditView.as_view(), name='ntSessionEdit'),
+	path('training/session/<int:pk>/edit/', views.SessionEditView.as_view(), name='ntSessionEdit'),
 
 	# About Page 
 	#/about
-	url(r'^about/$', views.AboutView.as_view(), name='ntAbout'),
+	path('about/', views.AboutView.as_view(), name='ntAbout'),
 
 ]
 handler404 = views.PageNotFoundView.as_view()

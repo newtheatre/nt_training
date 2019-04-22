@@ -3,7 +3,6 @@ from django.contrib import messages, auth
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.signals import user_logged_in, user_logged_out
-from django.contrib.auth.views import login 
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models.functions import Lower

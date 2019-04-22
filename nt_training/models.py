@@ -95,7 +95,9 @@ class Training_Spec(models.Model):
 	)
 	category = models.ForeignKey(
 		Icon,
-		limit_choices_to={'itemType': 'CAT'})
+		limit_choices_to={'itemType': 'CAT'},
+		on_delete=models.DO_NOTHING,
+	)
 	trainingTitle = models.CharField(
 		max_length=50,
 		verbose_name = "Training Title"
