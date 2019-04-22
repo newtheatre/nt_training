@@ -64,7 +64,7 @@ From nt_spec.py:
 	          {% endspaceless %}
 					</h5>
 				</div>
-				<table class="table table-hover table-sm mb-0 {% if card_settings.colour_bands == False %}table-inverse{% else %}text-dark{% endif %}">
+				<table class="table table-hover table-sm mb-0 {% if card_settings.colour_bands == False %}table-dark{% else %}text-dark{% endif %}">
 					{% spaceless %}
 					{% for item in training %}
 						{% if item.category == dept %}
