@@ -93,16 +93,13 @@
 			<hr>
 			<div class="row">
 				<div class="col">
-					<p class="text-center"><small class="text-muted">&copy; 2019 <a href="http://newtheatre.org.uk" class="nocolor clickme">Nottingham New Theatre</a></small></p>
+					<p class="text-center text-muted"><small>&copy; 2019 <a href="http://newtheatre.org.uk" class="nocolor clickme">Nottingham New Theatre</a></small></p>
 				</div>
 			</div>
 		</div>
 		<!-- End footer -->
 
 		<!-- Javascript -->
-
-			<!-- Font Awesome -->
-			<script src="https://use.fontawesome.com/e0914bf44d.js"></script>
 
 			<!-- Bootstrap Opt-ins -->
 			<script>
@@ -195,7 +192,7 @@
 					$("#traineesClear").click(function () {
 						$('input[id^="id_trainee_"]:checked').prop('checked',false);
 						$(".button-checkbox.active").removeClass("active"); // Remove .active class 
-						$(".button-checkbox-icon.fa-check-circle-o").toggleClass("fa-check-circle-o").toggleClass("fa-circle-o");; // Remove .active class 
+						$(".button-checkbox-icon.fa-check-circle").toggleClass("fa-check-circle").toggleClass("fa-circle");; // Remove .active class 
 					});
 				});
 			</script>
@@ -227,7 +224,7 @@
 						if (checkboxes[i].checked) {
 							checkedboxes.push(checkboxes[i]);
 							$(checkboxes[i]).closest(".button-checkbox").addClass('active');
-							$(checkboxes[i]).closest(".person-checkbox").nextAll(".button-checkbox-icon").addClass("fa-check-circle-o").removeClass("fa-circle-o");
+							$(checkboxes[i]).closest(".person-checkbox").nextAll(".button-checkbox-icon").addClass("fa-check-circle").removeClass("fa-circle");
 						}
 					}
 				});
@@ -238,11 +235,11 @@
 				    if($(this).is(':checked')) {
 				    	// Box gets checked
 				      $(this).closest(".button-checkbox").addClass('active');
-				      $(this).closest(".person-checkbox").nextAll(".fa-circle-o").toggleClass("fa-check-circle-o").toggleClass("fa-circle-o");
+				      $(this).closest(".person-checkbox").nextAll(".fa-circle").toggleClass("fa-check-circle").toggleClass("fa-circle");
 				    } else {
 				    	// Unchecked 
 				      $(this).closest(".button-checkbox").removeClass('active');
-				      $(this).closest(".person-checkbox").nextAll(".fa-check-circle-o").toggleClass("fa-check-circle-o").toggleClass("fa-circle-o");
+				      $(this).closest(".person-checkbox").nextAll(".fa-check-circle").toggleClass("fa-check-circle").toggleClass("fa-circle");
 				    }
 				});
 			</script>

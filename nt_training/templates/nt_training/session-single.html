@@ -15,7 +15,7 @@
 				</div>
 				{% if user.is_authenticated %}
 				  <div class="col-sm-3 col-12 text-center text-sm-right my-2 my-sm-0">
-				    <a href="{% url 'nt_training:ntSessionEdit' object.pk %}" class="btn btn-secondary btn-lg"><i class="fa fa-fw fa-lg fa-pencil"></i> <span class="d-sm-none d-lg-inline">Edit</span></a>
+				    <a href="{% url 'nt_training:ntSessionEdit' object.pk %}" class="btn btn-secondary btn-lg"><i class="fa fa-fw fa-lg fa-edit"></i> <span class="d-sm-none d-lg-inline">Edit</span></a>
 				  </div>
 				{% endif %}
 			</div>
