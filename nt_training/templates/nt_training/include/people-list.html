@@ -5,7 +5,7 @@
 	<!-- Buttons -->
 	<div class="col-12 col-sm-10 col-md-9">
 		<div class="btn-group d-flex" role="group" aria-label="Filtering options - students, committee members and graduates">
-			<span class="w-100 btn bg-nt-orange" style="cursor: default;" data-toggle="tooltip" data-placement="top" title="Filter"><i class="fa fa-fw fa-filter" aria-label="Filter"></i><span class="d-none d-sm-inline"><strong>&nbsp;Filter:</strong></span></span>
+			<button class="w-100 btn bg-nt-orange" style="cursor: default;" data-toggle="tooltip" data-placement="top" title="Filter"><i class="fa fa-fw fa-filter" aria-label="Filter"></i><span class="d-none d-sm-inline"><strong>&nbsp;Filter:</strong></span></button>
 			<button type="button" class="w-100 btn btn-primary btn-filter" id="STU" data-toggle="tooltip" data-placement="top" title="Student"><i class="fa fa-lg fa-fw fa-user"></i><span class="d-none d-lg-inline">&nbsp; Student</span></button>
 			<button type="button" class="w-100 btn btn-primary btn-filter" id="committee" data-toggle="tooltip" data-placement="top" title="Committee Member"><i class="fa fa-lg fa-fw fa-star fa-committee"></i><span class="d-none d-lg-inline">&nbsp; Committee</span></button>
 			<button type="button" class="w-100 btn btn-primary btn-filter" id="GRAD" data-toggle="tooltip" data-placement="top" title="Graduate"><i class="fa fa-lg fa-fw fa-graduation-cap"></i><span class="d-none d-lg-inline">&nbsp; Graduate</span></button>
@@ -16,7 +16,9 @@
 	<!-- Search -->
 	<div class="col-12 col-sm-10 col-md-3">
 		<div class="input-group">
-			<span class="input-group-addon"><i class="fa fa-search fa-fw nt-purple" aria-label="Search"></i></span>
+			<div class="input-group-prepend">
+				<span class="input-group-text"><i class="fa fa-search fa-fw nt-purple" aria-label="Search"></i></span>
+			</div>
 			<input id="people-search" class="form-control" placeholder="Search">
 		</div>
 	<br />
