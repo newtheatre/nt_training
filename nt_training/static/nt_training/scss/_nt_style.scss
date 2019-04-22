@@ -50,6 +50,11 @@ a.nocolor {
 .fa-committee {
 	color: theme-color("secondary");
 }
+tr.table-success:hover, tr.table-danger:hover {
+	td{
+		color: initial;
+	} 
+}
 
 td.wrapme {
 	white-space: normal !important; /*override bootstrap*/

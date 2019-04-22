@@ -3,9 +3,12 @@
 screen.css # Compiled CSS 
 
 db.sqlite3
+*db
 *.pyc
 .idea/
 venv/
+
+node_modules/
 
 # Logs and databases #
 ######################

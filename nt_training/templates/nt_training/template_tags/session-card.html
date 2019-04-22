@@ -14,7 +14,7 @@
 								<p class="mb-0">Areas covered:</p>
 								{% session_cats session as session_cat_dict %}
 								{% for icon, name in session_cat_dict.items %}
-									<i class="fa fa-fw fa-{{ icon }} fa-lg nt-orange" data-toggle="tooltip" data-placement="top" title="{{ name }}" aria-label="{{ name }}"></i>&nbsp;
+									<i class="fa-fw {{ icon }} fa-lg nt-orange" data-toggle="tooltip" data-placement="top" title="{{ name }}" aria-label="{{ name }}"></i>&nbsp;
 								{% endfor %}
 							</div>
 						</div>

@@ -11,6 +11,8 @@
 
 		<title>{% block title %}Title{% endblock %} | NNT Training</title>
 
+  	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600|Montserrat:400,500,600,700' rel='stylesheet' type='text/css'>
+
 		<!-- Popper.js (for Bootstrap 4) -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 
@@ -20,14 +22,16 @@
 		  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 		  crossorigin="anonymous"></script>
 
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-
+		<!-- Bootstrap JS --> 
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		
+		<!-- FontAwesome --> 
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 		<!-- Font Awesome Extension -->
 		<link rel="stylesheet" href="{% static 'nt_training/fae/fae.css' %}">
 
 		<!-- Training CSS -->
 		<link rel="stylesheet" href="{% static 'nt_training/css/screen.css' %}">
-		<!-- <link rel="stylesheet" href="{% static 'nt_training/css/print.css' %}"> -->
 
 	</head>
 	<body>
@@ -44,7 +48,7 @@
 		    </div>
 		    <div id="navbar" class="collapse navbar-collapse justify-content-end">
 		      <!-- Login buttons and dropdown --> 
-		      <ul class="navbar-nav order-md-2 ml-0">
+		      <ul class="navbar-nav order-md-2 ml-0 h6">
 		      	{% if user.is_authenticated %}
 		      	<div class="dropdown">
 		      		<li class="nav-item">
@@ -63,7 +67,7 @@
 		      	{% endif %}
 		      </ul>
 		      <!-- Actual navbar buttons -->
-		      <ul class="navbar-nav order-md-1 mr-md-auto pl-md-4">
+		      <ul class="navbar-nav order-md-1 mr-md-auto pl-md-4 h6">
 		      	{% nav_items %}
 		      </ul>
 		    </div><!--/.nav-collapse -->
@@ -93,16 +97,13 @@
 			<hr>
 			<div class="row">
 				<div class="col">
-					<p class="text-center"><small class="text-muted">&copy; 2018 <a href="http://newtheatre.org.uk" class="nocolor clickme">Nottingham New Theatre</a></small></p>
+					<p class="text-center text-muted"><small>&copy; 2019 <a href="http://newtheatre.org.uk" class="nocolor clickme">Nottingham New Theatre</a></small></p>
 				</div>
 			</div>
 		</div>
 		<!-- End footer -->
 
 		<!-- Javascript -->
-
-			<!-- Font Awesome -->
-			<script src="https://use.fontawesome.com/e0914bf44d.js"></script>
 
 			<!-- Bootstrap Opt-ins -->
 			<script>
@@ -181,7 +182,7 @@
 				    		var dept = $(this).attr('ID') // Get card
 				    		var deptClass = dept.replace("expand-",""); // Get dept
 				        $(".table-danger."+deptClass).toggleClass("d-none"); // Change class
-								$(this).find('#'+deptClass+'-fa').toggleClass("fa-expand").toggleClass("fa-compress");
+								$(this).find('#'+deptClass+'-fa').toggleClass("fa-angle-double-down").toggleClass("fa-angle-double-up");
 				    });
 				});
 			</script>
@@ -195,7 +196,7 @@
 					$("#traineesClear").click(function () {
 						$('input[id^="id_trainee_"]:checked').prop('checked',false);
 						$(".button-checkbox.active").removeClass("active"); // Remove .active class 
-						$(".button-checkbox-icon.fa-check-circle-o").toggleClass("fa-check-circle-o").toggleClass("fa-circle-o");; // Remove .active class 
+						$(".button-checkbox-icon.fa-check-circle").toggleClass("fa-check-circle").toggleClass("fa-circle");; // Remove .active class 
 					});
 				});
 			</script>
@@ -227,7 +228,7 @@
 						if (checkboxes[i].checked) {
 							checkedboxes.push(checkboxes[i]);
 							$(checkboxes[i]).closest(".button-checkbox").addClass('active');
-							$(checkboxes[i]).closest(".person-checkbox").nextAll(".button-checkbox-icon").addClass("fa-check-circle-o").removeClass("fa-circle-o");
+							$(checkboxes[i]).closest(".person-checkbox").nextAll(".button-checkbox-icon").addClass("fa-check-circle").removeClass("fa-circle");
 						}
 					}
 				});
@@ -238,11 +239,11 @@
 				    if($(this).is(':checked')) {
 				    	// Box gets checked
 				      $(this).closest(".button-checkbox").addClass('active');
-				      $(this).closest(".person-checkbox").nextAll(".fa-circle-o").toggleClass("fa-check-circle-o").toggleClass("fa-circle-o");
+				      $(this).closest(".person-checkbox").nextAll(".fa-circle").toggleClass("fa-check-circle").toggleClass("fa-circle");
 				    } else {
 				    	// Unchecked 
 				      $(this).closest(".button-checkbox").removeClass('active');
-				      $(this).closest(".person-checkbox").nextAll(".fa-check-circle-o").toggleClass("fa-check-circle-o").toggleClass("fa-circle-o");
+				      $(this).closest(".person-checkbox").nextAll(".fa-check-circle").toggleClass("fa-check-circle").toggleClass("fa-circle");
 				    }
 				});
 			</script>

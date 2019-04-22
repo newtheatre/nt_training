@@ -4,7 +4,7 @@
   "pk": 1,
   "fields": {
     "itemType": "CAT",
-    "iconRef": "lightbulb-o",
+    "iconRef": "far fa-lightbulb",
     "iconName": "Lighting",
     "weight": 2,
     "primary": false,
@@ -17,7 +17,7 @@
   "pk": 3,
   "fields": {
     "itemType": "CAT",
-    "iconRef": "headphones",
+    "iconRef": "fa fa-headphones",
     "iconName": "Sound",
     "weight": 3,
     "primary": false,
@@ -30,7 +30,7 @@
   "pk": 4,
   "fields": {
     "itemType": "CAT",
-    "iconRef": "list-ol",
+    "iconRef": "fa fa-list",
     "iconName": "Basics",
     "weight": 1,
     "primary": false,
@@ -43,7 +43,7 @@
   "pk": 5,
   "fields": {
     "itemType": "CAT",
-    "iconRef": "video-camera",
+    "iconRef": "fa fa-video",
     "iconName": "Video",
     "weight": 4,
     "primary": false,
@@ -56,7 +56,7 @@
   "pk": 7,
   "fields": {
     "itemType": "PAGE",
-    "iconRef": "id-card",
+    "iconRef": "far fa-id-card",
     "iconName": "Training",
     "weight": 2,
     "primary": true,
@@ -69,7 +69,7 @@
   "pk": 9,
   "fields": {
     "itemType": "PAGE",
-    "iconRef": "users",
+    "iconRef": "fa fa-users",
     "iconName": "People",
     "weight": 3,
     "primary": true,
@@ -82,7 +82,7 @@
   "pk": 10,
   "fields": {
     "itemType": "PAGE",
-    "iconRef": "question",
+    "iconRef": "fa fa-question",
     "iconName": "About",
     "weight": 5,
     "primary": false,
@@ -95,7 +95,7 @@
   "pk": 11,
   "fields": {
     "itemType": "PAGE",
-    "iconRef": "list",
+    "iconRef": "fa fa-list",
     "iconName": "Sessions",
     "weight": 4,
     "primary": false,
@@ -108,7 +108,7 @@
   "pk": 12,
   "fields": {
     "itemType": "CAT",
-    "iconRef": "plus-square-o",
+    "iconRef": "far fa-plus-square",
     "iconName": "Studio A",
     "weight": 7,
     "primary": false,
@@ -121,7 +121,7 @@
   "pk": 13,
   "fields": {
     "itemType": "CAT",
-    "iconRef": "user",
+    "iconRef": "fa fa-user-circle",
     "iconName": "Technical Director",
     "weight": 5,
     "primary": false,
@@ -134,7 +134,7 @@
   "pk": 14,
   "fields": {
     "itemType": "CAT",
-    "iconRef": "bolt",
+    "iconRef": "fa fa-bolt",
     "iconName": "Power",
     "weight": 6,
     "primary": false,

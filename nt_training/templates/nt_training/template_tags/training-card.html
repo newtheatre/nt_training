@@ -39,14 +39,14 @@ From nt_spec.py:
 
 		<div class="col-12 col-xl-4 col-lg-6">
 			<div class="card mb-4">
-				<div class="card-header bg-primary {% if card_settings.colour_bands == True %}expandPanel clickme{% endif %}" 
+				<div class="card-header bg-primary px-2 {% if card_settings.colour_bands == True %}expandPanel clickme{% endif %}" 
 					id="expand-{{ dept|slugify }}" data-toggle="tooltip" data-placement="top" title="{{ dept.description }}">
-					<h5 class="lead mb-0">
-						<a name="{{ dept|slugify }}"></a><i class="fa fa-fw fa-{{ dept.iconRef }} nt-orange mb-1 mb-sm-0"></i>&nbsp;{{ dept }}
+					<h7 class="lead">
+						<a name="{{ dept|slugify }}"></a>{{ dept }}
 						{% spaceless %}
 	          {% if card_settings.colour_bands == True %}
 	          	{# Expand button and counter labels #}
-							<i id="{{ dept|slugify }}-fa" class="fa fa-expand float-right expandPanel fa-fw nt-orange" data-toggle="tooltip" data-placement="bottom" title="Show/Hide incomplete training"></i>
+							<span class="float-right">&nbsp;<i id="{{ dept|slugify }}-fa" class="fa fa-angle-double-down float-right expandPanel fa-fw nt-orange mt-1" data-toggle="tooltip" data-placement="bottom" title="Show/Hide incomplete training"></i></span>
 							{% if person %}
 	          		{% tech_status person dept count=True as status %}
 	          	{% elif session_boxes %}
@@ -54,17 +54,15 @@ From nt_spec.py:
 	          	{% endif %}
 	          	{# Status.0 = User count; Status.1 = Spec count #}
 	          	{% if status.1 > 0 %} {# No label for departments with no training points #}
-	            	<span class="badge float-sm-right small {% if status.0 == status.1 %}badge-success{% elif status.0 == 0 %}badge-danger{% else %}badge-warning{% endif %}">{{ status.0 }} / {{ status.1 }}
+	            	<span class="badge {% if status.0 == status.1 %}badge-success{% elif status.0 == 0 %}badge-danger{% else %}badge-warning{% endif %}">{{ status.0 }} / {{ status.1 }}
 	            	</span>
 	            {% endif %}
-	          {% elif card_settings.checkboxes == True %}
-	          	{# Verify we're editing a training session #}
-	          	<a class="btn btn-secondary btn-sm float-sm-right mt-0 text-dark" style="margin-top:-0.75rem;" id="selectAll-{{dept|slugify}}">Select All</a>
 	          {% endif %}
 	          {% endspaceless %}
-					</h5>
+	          <i class="fa-fw {{ dept.iconRef }} nt-orange mt-1 float-right"></i>
+					</h7>
 				</div>
-				<table class="table table-hover table-sm mb-0 {% if card_settings.colour_bands == False %}table-inverse{% else %}text-dark{% endif %}">
+				<table class="table table-hover table-sm mb-0 {% if card_settings.colour_bands == False %}table-dark{% else %}text-dark{% endif %}">
 					{% spaceless %}
 					{% for item in training %}
 						{% if item.category == dept %}
@@ -101,6 +99,12 @@ From nt_spec.py:
 						</tr>
 					{% endif %}
 					{% endspaceless %}
+				{% if card_settings.checkboxes == True %}
+        	{# Verify we're editing a training session #}
+					<tr>
+        		<a class="btn btn-secondary rounded-0 btn-sm mt-0 text-dark" id="selectAll-{{dept|slugify}}">Select All</a>
+       	 	</tr>
+       	{% endif %}
 				</table>
 			</div><!-- /card -->
 		</div>

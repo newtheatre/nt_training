@@ -4,7 +4,7 @@
 {% block content %}
 	<div class="row">
 		<div class="col">
-			<h1 class="text-center nt-orange"><i class="fa fae-checklist-o fa-2x"></i></h1>
+			<h1 class="text-center nt-orange"><i class="fa fa-fw fa-2x fa-tasks"></i></h1>
 			<h1 class="text-center display-4-md">Nottingham New Theatre Training<br />
 			<small class="text-muted">Recap what you know. Find out what's yet to learn.</small></h1>
 		</div>
@@ -16,7 +16,7 @@
 					<div class="card-header clickme text-center p-0">
 						{% with 'nt_training:'|add:page.viewName as urlview %}
 							<a href="{% url urlview %}" class="btn btn-lg btn-block btn-primary py-3 rounded-0" role="button">
-								<h3><i class="fa fa-fw fa-{{ page.iconRef }} nt-orange"></i> 
+								<h3><i class="fa-fw {{ page.iconRef }} nt-orange"></i> 
 								View {{ page.iconName|title }}</h3>
 							</a>
         		{% endwith %}

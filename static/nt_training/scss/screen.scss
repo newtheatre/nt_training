@@ -3,11 +3,10 @@
 
 // Bootstrap
 	// Import custom Bootstrap variables
-	// @import "bootstrap-variables_3.3.7";
 	@import "bootstrap-variables";
 	
 	// Import Bootstrap
-	@import "bootstrap";
+	@import "../../../../node_modules/bootstrap/scss/bootstrap";
 	// or Import Bootstrap Flex
 	// @import "bootstrap-flex";
 	// or Import Bootstrap Grid
