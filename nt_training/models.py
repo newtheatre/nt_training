@@ -18,10 +18,14 @@ class Icon(models.Model):
 	)
 	iconRef = models.CharField(
 		max_length=25,
-		verbose_name = "Icon Code"
+		verbose_name = "Icon Code",
+		help_text = 'From <a href="https://fontawesome.com/icons?d=gallery&m=free">Font Awesome 5</a>. Example: <code>fas fa-user</code>.'
 	)
 	iconRef.short_description = "Icon Code"
-	iconName = models.CharField(max_length=25)
+	iconName = models.CharField(
+		max_length=25,
+		verbose_name = 'Icon Name'
+	)
 	weight = models.IntegerField()
 	primary = models.BooleanField(default=False)
 	description = models.TextField(
@@ -32,7 +36,8 @@ class Icon(models.Model):
 		max_length=25,
 		null=True,
 		blank=True,
-		default=None
+		default=None,
+		help_text = 'For pages only.'
 	)
 	def __str__(self):
 		if self.itemType == 'PAGE':
@@ -80,6 +85,9 @@ class Person(models.Model):
 		
 
 class Training_Spec(models.Model):
+	class Meta:
+		verbose_name = "Training Specification"
+
 	trainingId = models.DecimalField(
 		max_digits = 4,
 		decimal_places = 2,
@@ -88,16 +96,24 @@ class Training_Spec(models.Model):
 	category = models.ForeignKey(
 		Icon,
 		limit_choices_to={'itemType': 'CAT'})
-	trainingTitle = models.CharField(max_length=50)
+	trainingTitle = models.CharField(
+		max_length=50,
+		verbose_name = "Training Title"
+	) 
 	description = models.TextField(default="Provide a useful description")
-	safety = models.BooleanField(default=False)
+	safety = models.BooleanField(
+		default=False,
+		help_text = "Tick if training point has a health and safety element, or requires a period of supervision before signing off."
+	)
+
 	def __str__(self):
 		humanTitle = str(self.trainingId) + ' - ' +  self.trainingTitle
 		return humanTitle
 
-Training_Spec.short_description = "Training Specification"
-
 class Training_Session(models.Model):
+	class Meta:
+		verbose_name = "Training Session"
+
 	trainingId = models.ManyToManyField(Training_Spec)
 	trainer = models.ForeignKey(Person, on_delete=models.DO_NOTHING, related_name="trainer")
 	trainee = models.ManyToManyField(Person, related_name="trainee")
