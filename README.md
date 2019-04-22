@@ -13,7 +13,7 @@ Training is given to a person (or people) through training sessions, where anoth
 You will need: 
 * Django 1.11.1 
 * Python 3.6.1 (and Pip) 
-* Ruby and Rubygems (for Bootstrap 4, Sass and Compass)
+* ǸPM (for Bootstrap 4, Sass and Compass)
 
 ## Installation 
 ### Python Virtualenv 
@@ -49,20 +49,17 @@ python manage.py runserver
 Pages can be browsed locally at http://localhost:8000/
 
 ### Sass
-Once Rubygems is installed, run:
+Install npm with
 ```
-gem install bundler
-bundle install 
+npm install
 ```
-to install the relevant gems.
-
-To compile the Sass, navigate to <dir>/static/nt_training/static/ directory and run:
-``` 
-compass compile --force
-``` 
-Or 
+And then use either 
 ```
-compass watch
+npm run css_compile
+```
+to compile, or
+```
+npm run css_watch
 ```
 to recompile after every save of a Sass file.
 
