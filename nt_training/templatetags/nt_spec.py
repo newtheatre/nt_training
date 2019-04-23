@@ -1,7 +1,7 @@
 from django import template
 from django.db import models 
 from django.db.models import Count
-from ..models import Icon, Person, Training_Session, Training_Spec
+from ..models import Department, Icon, Person, Training_Session, Training_Spec
 
 register = template.Library() 
 
@@ -101,8 +101,9 @@ def training_cards(person=None, form=None, session_boxes=None):
 	# training point information modals; used when editing/creating a training session
 
 	#Get the data to iterate and compare with 
-	cats = Icon.objects.filter(itemType='CAT').order_by('weight')
+	cats = Icon.objects.filter(itemType='CAT').order_by('department','weight').select_related('department')
 	training = Training_Spec.objects.all().order_by('trainingId').select_related('category')
+	departments = Department.objects.all().order_by('weight')
 
 	if person is not None: 
 		# If we are dealing with a person, look at all the training they have been given
@@ -129,6 +130,7 @@ def training_cards(person=None, form=None, session_boxes=None):
 
 		return {
 			'card_settings': card_settings,
+			'departments': departments,
 			'cats': cats, # All categories
 			'training': training, # All training 
 			'person': person, # The person 
@@ -142,6 +144,7 @@ def training_cards(person=None, form=None, session_boxes=None):
 
 		return {
 			'card_settings': card_settings,
+			'departments': departments,
 			'cats': cats, # All categories
 			'training': training, # All training
 			'session_boxes': session_boxes # The training covered 
@@ -154,6 +157,7 @@ def training_cards(person=None, form=None, session_boxes=None):
 
 		return {
 			'card_settings': card_settings, 
+			'departments': departments,
 			'cats': cats, # All categories
 			'training': training, # All training 
 			'form': form 
@@ -165,6 +169,7 @@ def training_cards(person=None, form=None, session_boxes=None):
 
 		return { 
 			'card_settings': card_settings,
+			'departments': departments,
 			'cats': cats,
 			'training': training,
 		}

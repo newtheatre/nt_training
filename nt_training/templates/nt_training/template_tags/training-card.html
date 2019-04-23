@@ -21,93 +21,107 @@ From nt_spec.py:
 	{% load nt_training_sessions %}
 	{% load widget_tweaks %}
 
-	{# Jump labels #} 
+
+	{# Department labels  #} 
 	<div class="row">
 		<div class="col-12">
-			<p>Jump to: 
-				{% for dept in cats %}
-					<span><a href="#{{ dept|slugify }}" title="{{ dept|slugify }}" class="filter badge badge-secondary">{{ dept|title }}</a>&nbsp;</span>
+			<ul class="list-inline text-center mb-0">
+				{% for dept in departments %}
+					<li class="list-inline-item mb-0"><a href="#{{ dept|slugify }}" title="{{ dept|slugify }}" class="btn btn-secondary btn-lg btn-block">{% if dept.department_icon %}<i class="fa-fw {{ dept.department_icon }} nt-purple" aria-hidden="True"></i>&nbsp;{% endif %}{{ dept|title }}</a>&nbsp;</li>
 				{% endfor %}
-			</p>
+			</ul>
 			<p><i class="fa fa-exclamation-circle text-danger" aria-label="Exclamation point" title="Safety critical"></i> Training points with an exclamation point are safety-critical. As well as meaning more care is taken during training, they may only be signed off after a period of working under supervision.</p>
 		</div>
 	</div>
 
 	{# Category cards #}
-	<div class="row">
-		{% for dept in cats %}
-
-		<div class="col-12 col-xl-4 col-lg-6">
-			<div class="card mb-4">
-				<div class="card-header bg-primary px-2 {% if card_settings.colour_bands == True %}expandPanel clickme{% endif %}" 
-					id="expand-{{ dept|slugify }}" data-toggle="tooltip" data-placement="top" title="{{ dept.description }}">
-					<h7 class="lead">
-						<a name="{{ dept|slugify }}"></a>{{ dept }}
-						{% spaceless %}
-	          {% if card_settings.colour_bands == True %}
-	          	{# Expand button and counter labels #}
-							<span class="float-right">&nbsp;<i id="{{ dept|slugify }}-fa" class="fa fa-angle-double-down float-right expandPanel fa-fw nt-orange mt-1" data-toggle="tooltip" data-placement="bottom" title="Show/Hide incomplete training"></i></span>
-							{% if person %}
-	          		{% tech_status person dept count=True as status %}
-	          	{% elif session_boxes %}
-	          		{% session_status session_boxes dept as status %}
-	          	{% endif %}
-	          	{# Status.0 = User count; Status.1 = Spec count #}
-	          	{% if status.1 > 0 %} {# No label for departments with no training points #}
-	            	<span class="badge {% if status.0 == status.1 %}badge-success{% elif status.0 == 0 %}badge-danger{% else %}badge-warning{% endif %}">{{ status.0 }} / {{ status.1 }}
-	            	</span>
-	            {% endif %}
-	          {% endif %}
-	          {% endspaceless %}
-	          <i class="fa-fw {{ dept.iconRef }} nt-orange mt-1 float-right"></i>
-					</h7>
-				</div>
-				<table class="table table-hover table-sm mb-0 {% if card_settings.colour_bands == False %}table-dark{% else %}text-dark{% endif %}">
-					{% spaceless %}
-					{% for item in training %}
-						{% if item.category == dept %}
-							<tr class="
-								{{ dept|slugify }} 
-								{% if card_settings.modals == True %}clickme modal-href{% endif %} 
-								{% if card_settings.colour_bands == True %}
-									{% if item.trainingId in person_achieved_points or item in session_boxes %}
-										table-success
-									{% else %}
-										table-danger d-none
-									{% endif %}
-								{% endif %}"
-								id="{{item.pk}}">								
-								<td>
-									{% if card_settings.checkboxes == True %}
-										<input type="checkbox" name="trainingId" value="{{ item.pk }}" id="id_trainingId_{{ forloop.counter }}" class="form-controls checkbox-{{dept|slugify}}"
-										{# String required for a failed form; int required for first edit #}
-										{% if item.pk|stringformat:"i" in form.trainingId.value or item.pk in form.trainingId.value %}
-											checked=""
-										{% endif %}> 
-									{% endif %}
-									{{ item.trainingId }}
-								</td>
-								<td {% if card_settings.modals == True %}class="underhover"{% endif %}>{% if item.safety == True %}<i class="fa fa-exclamation-circle text-danger" aria-label="Exclamation point" title="Safety critical"></i>&nbsp;{% endif %}{{ item.trainingTitle }}</td>
-							</tr>
-						{% endif %}
-					{% endfor %}
-					{% tech_status person=None dept=dept as status %}
-					{# Use the counter to see if there is any training #}
-					{% if status == 0 %}
-						<tr>
-							<td class="text-center text-muted"><i class="fa fa-info-circle fa-fw"></i> No training in this department.</td>
-						</tr>
+	{% for dept in departments %}
+		<h2 class="mb-3"><a name="{{ dept|slugify }}"></a>{% if dept.department_icon %}<i class="fa-fw fa-lg {{ dept.department_icon }} nt-purple" aria-hidden="True"></i>&nbsp;{% endif %}{{ dept }} Training</h2>
+		{# Category labels #}
+		<div class="row">
+			<div class="col-12"><p>Jump to:
+				{% for cat in cats %}
+					{% if cat.department == dept %}
+						<span><a href="#{{ cat|slugify }}" title="{{ cat|slugify }}" class="filter badge badge-secondary">{{ cat|title }}</a>&nbsp;</span>
 					{% endif %}
-					{% endspaceless %}
-				{% if card_settings.checkboxes == True %}
-        	{# Verify we're editing a training session #}
-					<tr>
-        		<a class="btn btn-secondary rounded-0 btn-sm mt-0 text-dark" id="selectAll-{{dept|slugify}}">Select All</a>
-       	 	</tr>
-       	{% endif %}
-				</table>
-			</div><!-- /card -->
+				{% endfor %}
+			</p></div>
 		</div>
-
+		<div class="row">
+		{% for cat in cats %}
+			{% if cat.department == dept %}
+				<div class="col-12 col-xl-4 col-lg-6">
+					<div class="card mb-4">
+						<div class="card-header bg-primary px-2 {% if card_settings.colour_bands == True %}expandPanel clickme{% endif %}" 
+							id="expand-{{ cat|slugify }}" data-toggle="tooltip" data-placement="top" title="{{ cat.description }}">
+							<h7 class="lead">
+								<a name="{{ cat|slugify }}"></a>{{ cat }}
+								{% spaceless %}
+			          {% if card_settings.colour_bands == True %}
+			          	{# Expand button and counter labels #}
+									<span class="float-right">&nbsp;<i id="{{ cat|slugify }}-fa" class="fa fa-angle-double-down float-right expandPanel fa-fw nt-orange mt-1" data-toggle="tooltip" data-placement="bottom" title="Show/Hide incomplete training"></i></span>
+									{% if person %}
+			          		{% tech_status person cat count=True as status %}
+			          	{% elif session_boxes %}
+			          		{% session_status session_boxes cat as status %}
+			          	{% endif %}
+			          	{# Status.0 = User count; Status.1 = Spec count #}
+			          	{% if status.1 > 0 %} {# No label for departments with no training points #}
+			            	<span class="badge {% if status.0 == status.1 %}badge-success{% elif status.0 == 0 %}badge-danger{% else %}badge-warning{% endif %}">{{ status.0 }} / {{ status.1 }}
+			            	</span>
+			            {% endif %}
+			          {% endif %}
+			          {% endspaceless %}
+			          <i class="fa-fw {{ cat.iconRef }} nt-orange mt-1 float-right"></i>
+							</h7>
+						</div>
+						<table class="table table-hover table-sm mb-0 {% if card_settings.colour_bands == False %}table-dark{% else %}text-dark{% endif %}">
+							{% spaceless %}
+							{% for item in training %}
+								{% if item.category == cat %}
+									<tr class="
+										{{ cat|slugify }} 
+										{% if card_settings.modals == True %}clickme modal-href{% endif %} 
+										{% if card_settings.colour_bands == True %}
+											{% if item.trainingId in person_achieved_points or item in session_boxes %}
+												table-success
+											{% else %}
+												table-danger d-none
+											{% endif %}
+										{% endif %}"
+										id="{{item.pk}}">								
+										<td>
+											{% if card_settings.checkboxes == True %}
+												<input type="checkbox" name="trainingId" value="{{ item.pk }}" id="id_trainingId_{{ forloop.counter }}" class="form-controls checkbox-{{cat|slugify}}"
+												{# String required for a failed form; int required for first edit #}
+												{% if item.pk|stringformat:"i" in form.trainingId.value or item.pk in form.trainingId.value %}
+													checked=""
+												{% endif %}> 
+											{% endif %}
+											{{ item.trainingId }}
+										</td>
+										<td {% if card_settings.modals == True %}class="underhover"{% endif %}>{% if item.safety == True %}<i class="fa fa-exclamation-circle text-danger" aria-label="Exclamation point" title="Safety critical"></i>&nbsp;{% endif %}{{ item.trainingTitle }}</td>
+									</tr>
+								{% endif %}
+							{% endfor %}
+							{% tech_status person=None dept=cat as status %}
+							{# Use the counter to see if there is any training #}
+							{% if status == 0 %}
+								<tr>
+									<td class="text-center text-muted"><i class="fa fa-info-circle fa-fw"></i> No training in this department.</td>
+								</tr>
+							{% endif %}
+							{% endspaceless %}
+						{% if card_settings.checkboxes == True %}
+		        	{# Verify we're editing a training session #}
+							<tr>
+		        		<a class="btn btn-secondary rounded-0 btn-sm mt-0 text-dark" id="selectAll-{{cat|slugify}}">Select All</a>
+		       	 	</tr>
+		       	{% endif %}
+						</table>
+					</div><!-- /card -->
+				</div><!-- /column -->
+			{% endif %}
+		{% endfor %}
+		</div>{% if not forloop.last %}<hr class="mt-0">{% endif %}
 	{% endfor %}
-</div>

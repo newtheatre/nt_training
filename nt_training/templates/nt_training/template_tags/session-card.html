@@ -11,11 +11,22 @@
 								</a>
 							</div>
 							<div class="card-body text-center">
-								<p class="mb-0">Areas covered:</p>
-								{% session_cats session as session_cat_dict %}
-								{% for icon, name in session_cat_dict.items %}
-									<i class="fa-fw {{ icon }} fa-lg nt-orange" data-toggle="tooltip" data-placement="top" title="{{ name }}" aria-label="{{ name }}"></i>&nbsp;
+								{% session_meta session as session_info %}
+								{% with session_cat_dict=session_info.session_cat_dict session_depts=session_info.session_depts %}
+								<p>Training areas:</p>
+								{% for dept in session_depts %}
+									{% for icon, name in session_cat_dict.items %}
+										{% with name=name.0 %}
+											{% if name.department == dept %}
+												<i class="fa-fw {{ icon }} fa-lg nt-orange" data-toggle="tooltip" data-placement="top" title="{{ name }}" aria-label="{{ name }}"></i>&nbsp;
+											{% endif %}
+										{% endwith %}
+									{% endfor %}
+									{% if dept.department_icon %}<span class="float-left"><i class="fa-fw fa-lg nt-purple text-left {{ dept.department_icon }}" data-toggle="tooltip" data-placement="top" title="{{ dept.name }}" aria-label="{{ dept.name }}"></i></span>{% endif %}
+									<br />
+										<hr>
 								{% endfor %}
+								{% endwith %}
 							</div>
 						</div>
 					</div>

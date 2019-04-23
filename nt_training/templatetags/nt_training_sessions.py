@@ -1,7 +1,7 @@
 # Tags relating to training sessions primarily.
 
 from django import template
-from ..models import Icon, Person, Training_Session, Training_Spec
+from ..models import Icon, Department, Person, Training_Session, Training_Spec
 
 register = template.Library() 
 
@@ -46,28 +46,32 @@ def ordered_set(seq):
 
 
 @register.simple_tag
-def session_cats(session):
+def session_meta(session):
 	# Returns the list of categories covered in a given training session
 	ids = session.trainingId.order_by('trainingId').select_related('category') #Get points
 	session_cat_list = [] #For population later
+	session_depts = []
 	for trainingid in ids:
-		session_cat_list.append(trainingid.category.iconRef)
-
+		session_cat_list.append(trainingid.category.iconRef) # Get a list of the categories involved
+		session_depts.append(trainingid.category.department)
 	session_cat_list = ordered_set(session_cat_list) #Preserve numerical order
-	allcats = Icon.objects.filter(itemType = 'CAT')
+	session_depts = ordered_set(session_depts)
+
+	allcats = Icon.objects.filter(itemType = 'CAT') #All the training categories 
 	session_cat_dict = {} #Dictionary for use in templates
 	for cat in session_cat_list:
-		this_cat_icon = allcats.get(iconRef = cat)
-		session_cat_dict[cat] = this_cat_icon
+		this_cat_icon = allcats.get(iconRef = cat) # Get the list of icons 
+		session_cat_dict[cat] = [this_cat_icon]
 
-	return session_cat_dict
+	return {'session_cat_dict': session_cat_dict, 'session_depts': session_depts}
 
 @register.inclusion_tag('nt_training/template_tags/session-card.html')
 def session_cards(sessions=None):
 	# Display training sessions as panels
-	# (also uses session_cats, above, in the inclusion tag)
+	# (also uses session_meta, above, in the inclusion tag)
 	if sessions == None:
 		# If no sessions are given, default to use all of them
 		sessions = Training_Session.objects.all().prefetch_related('trainingId')
 
-	return {'sessions': sessions}
+	departments = Department.objects.all()
+	return {'sessions': sessions, 'departments': departments}

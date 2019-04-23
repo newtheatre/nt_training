@@ -4,7 +4,7 @@ from django.forms import CheckboxSelectMultiple
 
 # Register your models here.
 
-from .models import Icon, Person, Training_Session, Training_Spec
+from .models import Department, Icon, Person, Training_Session, Training_Spec
 
 class PersonAdmin(admin.ModelAdmin):
 	fields = ['first_name', 'last_name','slug','email','status','grad_year', 'committee', 'is_trainer']
@@ -62,10 +62,14 @@ class TrainingSessionAdmin(admin.ModelAdmin):
 
 class IconAdmin(admin.ModelAdmin):
 	prepopulated_fields = {"description": ("iconName",)}
-	list_display = ['itemType', 'weight', 'iconName', 'iconRef']
+	list_display = ['itemType', 'department', 'weight', 'iconName', 'iconRef']
 	list_filter = ['itemType']
+
+class DepartmentAdmin(admin.ModelAdmin):
+	list_display = ['name', 'department_icon', 'person', 'email', 'weight']
 
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Training_Session, TrainingSessionAdmin)
 admin.site.register(Training_Spec, TrainingSpecAdmin)
 admin.site.register(Icon, IconAdmin)
+admin.site.register(Department, DepartmentAdmin)
