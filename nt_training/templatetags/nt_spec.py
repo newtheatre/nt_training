@@ -104,6 +104,8 @@ def training_cards(person=None, form=None, session_boxes=None):
 	cats = Icon.objects.filter(itemType='CAT').order_by('department','weight').select_related('department')
 	training = Training_Spec.objects.all().order_by('trainingId').select_related('category')
 	departments = Department.objects.all().order_by('weight')
+	if not departments:
+		departments = ['no_depts']
 
 	if person is not None: 
 		# If we are dealing with a person, look at all the training they have been given

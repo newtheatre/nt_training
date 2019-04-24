@@ -2,32 +2,44 @@
 			{# Display training sessions as a grid of cards #}
 			<div class="row">
 				{% for session in sessions %}
-					<div class="col-lg-3 col-md-4 col-sm-6 col-12 my-2 ">
-						<div class="card" style="height:100%;">
+					<div class="col-lg-3 col-md-4 col-sm-6 col-12 my-2">
+						<div class="card">
 							<div class="card-header text-center bg-secondary p-0">
 								<a href="{% url 'nt_training:ntSessionSingle' session.pk %}" class="btn btn-block btn-primary rounded-0">
 									<h5>Trainer: <strong>{{ session.trainer }}</strong></h5>
 									<span>{{ session.date }}</span>
 								</a>
 							</div>
-							<div class="card-body text-center">
-								{% session_meta session as session_info %}
-								{% with session_cat_dict=session_info.session_cat_dict session_depts=session_info.session_depts %}
-								<p>Training areas:</p>
-								{% for dept in session_depts %}
-									{% for icon, name in session_cat_dict.items %}
-										{% with name=name.0 %}
-											{% if name.department == dept %}
-												<i class="fa-fw {{ icon }} fa-lg nt-orange" data-toggle="tooltip" data-placement="top" title="{{ name }}" aria-label="{{ name }}"></i>&nbsp;
+							<table class="table table-sm table-dark table-hover mb-0">
+								<col width="10%">
+								<col width="90%">
+								<thead>
+									<td class="text-center" {% if departments.0 != 'no_depts' %}colspan="2"{% endif %}><strong>Areas Covered</strong></td>
+								</thead>
+								<tbody>
+									{% session_meta session as session_info %}
+									{% with session_cat_dict=session_info.session_cat_dict session_depts=session_info.session_depts %}
+									{% for dept in session_depts %}
+										<tr>
+											{% if dept %}
+											<td class="text-center">
+												<i class="fa-fw fa-lg nt-purple text-left {{ dept.department_icon }}" data-toggle="tooltip" data-placement="top" title="{{ dept.name }}" aria-label="{{ dept.name }}"></i>
+											</td>
 											{% endif %}
-										{% endwith %}
+											<td {% if not dept %}class="text-center"{% endif %}>
+											{% for icon, name in session_cat_dict.items %}
+												{% with name=name.0 %}
+													{% if name.department == dept %}
+														<i class="fa-fw {{ icon }} fa-lg nt-orange" data-toggle="tooltip" data-placement="top" title="{{ name }}" aria-label="{{ name }}"></i>
+													{% endif %}
+												{% endwith %}
+											{% endfor %}
+											</td>
+										</tr>
 									{% endfor %}
-									{% if dept.department_icon %}<span class="float-left"><i class="fa-fw fa-lg nt-purple text-left {{ dept.department_icon }}" data-toggle="tooltip" data-placement="top" title="{{ dept.name }}" aria-label="{{ dept.name }}"></i></span>{% endif %}
-									<br />
-										<hr>
-								{% endfor %}
-								{% endwith %}
-							</div>
+									{% endwith %}
+								</tbody>
+							</table>
 						</div>
 					</div>
 				{% endfor %}

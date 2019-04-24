@@ -29,8 +29,7 @@ class Department(models.Model):
 	department_icon = models.CharField(
 		max_length=25,
 		verbose_name = "Icon Code",
-		blank = True,
-		null = True,
+		default="fa fa-",
 		help_text = 'From <a href="https://fontawesome.com/icons?d=gallery&m=free">Font Awesome 5</a>. Example: <code>fas fa-user</code>.'
 	)
 	def __str__(self):
@@ -60,10 +59,10 @@ class Icon(models.Model):
 	weight = models.IntegerField()
 	department = models.ForeignKey(
 		Department,
-		on_delete=models.DO_NOTHING,
+		on_delete=models.SET_NULL,
 		blank=True,
 		null=True,
-		help_text = "Department this category belongs to"
+		help_text = "Department this category belongs to. If you're using departments, you <strong>must</strong> set this for the category to appear."
 	)
 	description = models.TextField(
 		null=True,

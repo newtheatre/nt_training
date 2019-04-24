@@ -21,27 +21,29 @@ From nt_spec.py:
 	{% load nt_training_sessions %}
 	{% load widget_tweaks %}
 
-
-	{# Department labels  #} 
 	<div class="row">
 		<div class="col-12">
+			{% if departments.0 != 'no_depts' %}
 			<ul class="list-inline text-center mb-0">
+				{# Department labels  #} 
 				{% for dept in departments %}
 					<li class="list-inline-item mb-0"><a href="#{{ dept|slugify }}" title="{{ dept|slugify }}" class="btn btn-secondary btn-lg btn-block">{% if dept.department_icon %}<i class="fa-fw {{ dept.department_icon }} nt-purple" aria-hidden="True"></i>&nbsp;{% endif %}{{ dept|title }}</a>&nbsp;</li>
 				{% endfor %}
 			</ul>
+			{% endif %}
 			<p><i class="fa fa-exclamation-circle text-danger" aria-label="Exclamation point" title="Safety critical"></i> Training points with an exclamation point are safety-critical. As well as meaning more care is taken during training, they may only be signed off after a period of working under supervision.</p>
 		</div>
 	</div>
 
 	{# Category cards #}
 	{% for dept in departments %}
-		<h2 class="mb-3"><a name="{{ dept|slugify }}"></a>{% if dept.department_icon %}<i class="fa-fw fa-lg {{ dept.department_icon }} nt-purple" aria-hidden="True"></i>&nbsp;{% endif %}{{ dept }} Training</h2>
+		{% if dept != 'no_depts' %}
+		<h2 class="mb-3"><a name="{{ dept|slugify }}"></a><i class="fa-fw fa-lg {{ dept.department_icon }} nt-purple" aria-hidden="True"></i>&nbsp;{% endif %}{{ dept }} Training</h2>
 		{# Category labels #}
 		<div class="row">
 			<div class="col-12"><p>Jump to:
 				{% for cat in cats %}
-					{% if cat.department == dept %}
+					{% if cat.department == dept or dept == 'no_depts' %}
 						<span><a href="#{{ cat|slugify }}" title="{{ cat|slugify }}" class="filter badge badge-secondary">{{ cat|title }}</a>&nbsp;</span>
 					{% endif %}
 				{% endfor %}
@@ -49,7 +51,7 @@ From nt_spec.py:
 		</div>
 		<div class="row">
 		{% for cat in cats %}
-			{% if cat.department == dept %}
+			{% if cat.department == dept or dept == 'no_depts' %}
 				<div class="col-12 col-xl-4 col-lg-6">
 					<div class="card mb-4">
 						<div class="card-header bg-primary px-2 {% if card_settings.colour_bands == True %}expandPanel clickme{% endif %}" 

@@ -74,4 +74,6 @@ def session_cards(sessions=None):
 		sessions = Training_Session.objects.all().prefetch_related('trainingId')
 
 	departments = Department.objects.all()
+	if not departments:
+		departments = ['no_depts']
 	return {'sessions': sessions, 'departments': departments}
