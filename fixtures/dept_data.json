@@ -26,8 +26,8 @@
   "pk": 9,
   "fields": {
     "name": "Union",
-    "person": "SU Safety",
-    "email": "susafety@nottingham.ac.uk",
+    "person": "Theatre Manager",
+    "email": "theatremanager@newtheatre.org.uk",
     "weight": 3,
     "department_icon": "fa fa-plus"
   }
