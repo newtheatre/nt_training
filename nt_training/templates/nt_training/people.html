@@ -10,7 +10,7 @@
 	<div class="col">
 		<h1 class="text-center">People</h1>
 
-		<p class="text-center">Can't see your name? Drop the <a href="mailto:ctd@newtheatre.org.uk">Company Technical Director</a> or <a href="mailto:workshop@newtheatre.org.uk">Company Master Carpenter</a> an email to get started. <br />
+		<p class="text-center">Can't see your name? {% if departments %}Drop the {% for p in departments %}{% if forloop.last and not forloop.first %}or {% endif %}<a href="mailto:{{ p.email }}">{{ p.person }}</a>{% if not forloop.last %}, {% endif %}{% endfor %} an email{% else %}<a href="mailto:tech@newtheatre.org.uk">Drop usan email</a>{% endif %} to get started.
 	</div>
 </div>
 {% if not people %}

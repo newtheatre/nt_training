@@ -17,7 +17,7 @@ from django.views import generic
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 
 # DB Includes
-from .models import Icon, Person, Training_Session, Training_Spec
+from .models import Department, Icon, Person, Training_Session, Training_Spec
 
 # Forms
 from .forms import SessionForm
@@ -39,6 +39,13 @@ class AboutView(generic.TemplateView):
 	model = Icon
 	template_name = "nt_training/about.html"
 
+	def get_context_data(self):
+		context = {} 
+		context['Icon'] = Icon.objects.all() 
+		context['departments'] = Department.objects.all()
+
+		return context
+
 class PeopleView(generic.ListView):
 	template_name = "nt_training/people.html"
 	model = Person
@@ -50,6 +57,7 @@ class PeopleView(generic.ListView):
 		context['people'] = Person.objects.all()
 		# Get the training categories
 		context['cats'] = Icon.objects.filter(itemType='CAT').order_by('weight').only('iconName')
+		context['departments'] = Department.objects.all()
 		return context
 
 class PersonView(generic.DetailView):
