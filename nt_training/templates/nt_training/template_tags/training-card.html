@@ -38,7 +38,7 @@ From nt_spec.py:
 	{# Category cards #}
 	{% for dept in departments %}
 		{% if dept != 'no_depts' %}
-		<h2 class="mb-3"><a name="{{ dept|slugify }}"></a><i class="fa-fw fa-lg {{ dept.department_icon }} nt-purple" aria-hidden="True"></i>&nbsp;{% endif %}{{ dept }} Training</h2>
+		<h2 class="mb-3"><a name="{{ dept|slugify }}"></a><i class="fa-fw fa-lg {{ dept.department_icon }} nt-purple" aria-hidden="True"></i>&nbsp;{% endif %}{{ dept }} Training <small><a href="mailto:{{ dept.email }}">({{ dept.email }})</a></small></h2>
 		{# Category labels #}
 		<div class="row">
 			<div class="col-12"><p>Jump to:
