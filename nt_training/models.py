@@ -8,7 +8,37 @@ from django.utils import timezone
 
 # NNT Training Models
 
+class Department(models.Model):
+	class Meta:
+		ordering = ['weight']
+
+	name = models.CharField(
+		verbose_name = "Department Name",
+		max_length = 50
+	)
+	person = models.CharField(
+		help_text = "Person in charge of the department",
+		max_length = 50
+	)
+	email = models.EmailField(
+		help_text = "Email address of the person in charge"
+	)
+	weight = models.IntegerField(
+		unique = True 
+	)
+	department_icon = models.CharField(
+		max_length=25,
+		verbose_name = "Icon Code",
+		default="fa fa-",
+		help_text = 'From <a href="https://fontawesome.com/icons?d=gallery&m=free">Font Awesome 5</a>. Example: <code>fas fa-user</code>.'
+	)
+	def __str__(self):
+		return str(self.name)
+
 class Icon(models.Model):
+	class Meta:
+		ordering = ['itemType','weight']
+
 	itemType = models.CharField(
 		max_length=15,
 		choices = (
@@ -27,11 +57,18 @@ class Icon(models.Model):
 		verbose_name = 'Icon Name'
 	)
 	weight = models.IntegerField()
-	primary = models.BooleanField(default=False)
+	department = models.ForeignKey(
+		Department,
+		on_delete=models.SET_NULL,
+		blank=True,
+		null=True,
+		help_text = "Department this category belongs to. If you're using departments, you <strong>must</strong> set this for the category to appear."
+	)
 	description = models.TextField(
 		null=True,
 		blank=True,
 	)
+	primary = models.BooleanField(default=False, help_text = "For pages only. Tick to appear on the homepage.")
 	viewName = models.CharField(
 		max_length=25,
 		null=True,
@@ -87,6 +124,7 @@ class Person(models.Model):
 class Training_Spec(models.Model):
 	class Meta:
 		verbose_name = "Training Specification"
+		ordering = ['category', 'trainingId']
 
 	trainingId = models.DecimalField(
 		max_digits = 4,

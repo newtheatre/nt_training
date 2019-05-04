@@ -1,10 +1,10 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.db import models 
 from django.forms import CheckboxSelectMultiple
 
 # Register your models here.
 
-from .models import Icon, Person, Training_Session, Training_Spec
+from .models import Department, Icon, Person, Training_Session, Training_Spec
 
 class PersonAdmin(admin.ModelAdmin):
 	fields = ['first_name', 'last_name','slug','email','status','grad_year', 'committee', 'is_trainer']
@@ -60,12 +60,39 @@ class TrainingSessionAdmin(admin.ModelAdmin):
 	}
 	list_filter = ['date','trainee','trainer']
 
+# Dynamic actions for adding bulk adding categories to departments
+# Creates actions by iterating over the departments 
+def add_to_dept_action(department):
+	def add_to_dept(modeladmin, request, queryset):
+		for category in queryset: 
+			setattr(category, 'department', department)
+			category.save() 
+			messages.info(request, "{0} added to {1}.".format(category, department))
+
+	add_to_dept.short_description = "Add to {0}".format(department)
+	add_to_dept.__name__ = "add_to_dept_{0}".format(department.pk) #Each action must be uniquely named
+
+	return add_to_dept
+
 class IconAdmin(admin.ModelAdmin):
 	prepopulated_fields = {"description": ("iconName",)}
-	list_display = ['itemType', 'weight', 'iconName', 'iconRef']
+	list_display = ['itemType', 'department', 'weight', 'iconName', 'iconRef']
 	list_filter = ['itemType']
+
+	def get_actions(self, request):
+		actions = super(IconAdmin, self).get_actions(request)
+
+		for dept in Department.objects.all():
+			action = add_to_dept_action(dept)
+			actions[action.__name__] = (action, action.__name__, action.short_description)
+
+		return actions
+
+class DepartmentAdmin(admin.ModelAdmin):
+	list_display = ['name', 'department_icon', 'person', 'email', 'weight']
 
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Training_Session, TrainingSessionAdmin)
 admin.site.register(Training_Spec, TrainingSpecAdmin)
 admin.site.register(Icon, IconAdmin)
+admin.site.register(Department, DepartmentAdmin)

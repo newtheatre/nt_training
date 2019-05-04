@@ -11,7 +11,12 @@
 	<div class="modal-dialog modal-lg" role="document" id="modal-content">
 		<div class="modal-content">
 			<div class="modal-header">
-      	<h4 class="modal-title">{% if item.safety == True %}<i class="fa fa-exclamation-circle text-danger" aria-label="Exclamation point" title="Safety critical"></i>&nbsp;{% endif %}{{ item.trainingId }} &ndash; {{ item.trainingTitle }}</h4>
+      	<h4 class="modal-title w-100">{% if item.safety == True %}<i class="fa fa-exclamation-circle text-danger" aria-label="Exclamation point" title="Safety critical"></i>&nbsp;{% endif %}{{ item.trainingId }} &ndash; {{ item.trainingTitle }} 
+      		<span class="float-right">
+      			<i class="fa-fw nt-orange {{ item.category.iconRef }}" data-toggle="tooltip" data-placement="in bottom" title="{{ item.category }}"></i>
+      			<i class="fa-fw nt-purple {{ item.category.department.department_icon }}" data-toggle="tooltip" data-placement="in bottom" title="{{ item.category.department.name }}"></i>
+      		</span>
+      	</h4>
     	</div>
     	<div class="modal-body">
     		{{ item.description|linebreaks }}
