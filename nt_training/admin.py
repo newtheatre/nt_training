@@ -82,9 +82,10 @@ class IconAdmin(admin.ModelAdmin):
 	def get_actions(self, request):
 		actions = super(IconAdmin, self).get_actions(request)
 
-		for dept in Department.objects.all():
-			action = add_to_dept_action(dept)
-			actions[action.__name__] = (action, action.__name__, action.short_description)
+		if Department.objects.all():
+			for dept in Department.objects.all():
+				action = add_to_dept_action(dept)
+				actions[action.__name__] = (action, action.__name__, action.short_description)
 
 		return actions
 
