@@ -26,13 +26,13 @@
 				{% if not people.trainers %}
 					<p class="text-muted">This has not been taught by anyone.</p>
 				{% else %}
-					<p>Has been taught by: {% for p in people.trainers %}<a href="{% url 'nt_training:ntPerson' p.slug %}">{{ p|title }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
+					<p>Has been taught by: {% for p in people.trainers %}<a href="{% url 'nt_training:ntPerson' p.slug %}">{{ p }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
 				{% endif %}
     		<!-- Trainees -->
 				{% if not people.trainees %}
 					<p class="text-muted">This has not been taught to any current student.</p>
 				{% else %}
-				<p>Current students this has been taught to: {% for p in people.trainees %}<a href="{% url 'nt_training:ntPerson' p.slug %}">{{ p|title }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
+				<p>Current students this has been taught to: {% for p in people.trainees %}<a href="{% url 'nt_training:ntPerson' p.slug %}">{{ p }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
 				{% endif %}
     	</div>
     	<div class="modal-footer">
@@ -52,13 +52,13 @@
 			{% if not people.trainers %}
 				<p class="text-muted">This has not been taught by anyone.</p>
 			{% else %}
-				<p>Has been taught by: {% for p in people.trainers %}<a href="{% url 'nt_training:ntPerson' p.slug %}">{{ p|title }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
+				<p>Has been taught by: {% for p in people.trainers %}<a href="{% url 'nt_training:ntPerson' p.slug %}">{{ p }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
 			{% endif %}
   		<!-- Trainees -->
 			{% if not people.trainees %}
 				<p class="text-muted">This has not been taught to any current student.</p>
 			{% else %}
-			<p>Current students this has been taught to: {% for p in people.trainees %}<a href="{% url 'nt_training:ntPerson' p.slug %}">{{ p|title }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
+			<p>Current students this has been taught to: {% for p in people.trainees %}<a href="{% url 'nt_training:ntPerson' p.slug %}">{{ p }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
 			{% endif %}
 		</div>
 	</div>
