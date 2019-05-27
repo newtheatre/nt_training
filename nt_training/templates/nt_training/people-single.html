@@ -1,7 +1,7 @@
 {% extends 'nt_training/base.html' %}
 {% load nt_training_sessions %}
 {% load nt_spec %}
-{% block title %}{{ person|title }}{% endblock %}
+{% block title %}{{ person }}{% endblock %}
 
 {% block content %}
 
@@ -10,7 +10,7 @@
     <a href="{% url 'nt_training:ntPeople' %}"><button class="btn btn-primary btn-lg align-middle"><i class="fa fa-fw fa-lg fa-users nt-orange"></i> View all people</button></a>
   </div>
   <div class="col-md-6 col-12">
-    <h1 class="text-center">{{ person|title }}
+    <h1 class="text-center">{{ person }}
     	<small>
     		{% if person.status == 'GRAD' %}
 	    		<span class="badge badge-success">
@@ -52,7 +52,7 @@
     <div class="card">
       <div class="card-header bg-primary clickme">
         <a data-toggle="collapse" data-target="#collapse-{{person.slug}}" class="collapsea text-white nocolor">
-          <div style="width:100%"><h4>Training sessions {{ person|title }} has been involved in<i class="fa fa-chevron-down fa-pull-right"></i></h4></div>
+          <div style="width:100%"><h4>Training sessions {{ person }} has been involved in<i class="fa fa-chevron-down fa-pull-right"></i></h4></div>
         </a>
       </div>
       <div class="collapse card-body" id="collapse-{{person.slug}}">
