@@ -1,7 +1,7 @@
 from django import template
 from django.db import models 
 from django.db.models import Count
-from ..models import Department, Icon, Person, Training_Session, Training_Spec
+from ..models import Department, Category, Person, Training_Session, Training_Spec
 
 register = template.Library() 
 
@@ -101,7 +101,7 @@ def training_cards(person=None, form=None, session_boxes=None):
 	# training point information modals; used when editing/creating a training session
 
 	#Get the data to iterate and compare with 
-	cats = Icon.objects.filter(itemType='CAT').order_by('department','weight').select_related('department')
+	cats = Category.objects.all().order_by('department','weight').select_related('department')
 	training = Training_Spec.objects.all().order_by('trainingId').select_related('category')
 	departments = Department.objects.all().order_by('weight')
 	if not departments:

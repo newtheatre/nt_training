@@ -18,7 +18,7 @@ from django.views import generic
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 
 # DB Includes
-from .models import Department, Icon, Person, Training_Session, Training_Spec
+from .models import Site_Page, Department, Category, Person, Training_Session, Training_Spec
 
 # Forms
 from .forms import SessionForm
@@ -29,23 +29,17 @@ class PageNotFoundView(generic.ListView):
 	template_name = "nt_training/404.html"
 
 class HomeView(generic.ListView):
-	model = Icon
+	model = Site_Page
 	template_name = "nt_training/index.html"
 	context_object_name = "page_list"
-	def get_queryset(self):
-		# Exclude training categories
-		return Icon.objects.filter(itemType='PAGE')
 
 class AboutView(generic.TemplateView):
-	model = Icon
+	model = Department
 	template_name = "nt_training/about.html"
-
 	def get_context_data(self):
 		context = {} 
-		context['Icon'] = Icon.objects.all() 
 		context['departments'] = Department.objects.all()
-
-		return context
+		return context 
 
 class PeopleView(generic.ListView):
 	template_name = "nt_training/people.html"
@@ -57,7 +51,7 @@ class PeopleView(generic.ListView):
 		# Get all the people. Lower required to allow for mixed-case in DB
 		context['people'] = Person.objects.all()
 		# Get the training categories
-		context['cats'] = Icon.objects.filter(itemType='CAT').order_by('weight').only('iconName')
+		context['cats'] = Category.objects.order_by('weight').only('iconName')
 		context['departments'] = Department.objects.all()
 		return context
 

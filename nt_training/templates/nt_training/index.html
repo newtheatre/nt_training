@@ -17,7 +17,7 @@
 						{% with 'nt_training:'|add:page.viewName as urlview %}
 							<a href="{% url urlview %}" class="btn btn-lg btn-block btn-primary py-3 rounded-0" role="button">
 								<h3><i class="fa-fw {{ page.iconRef }} nt-orange"></i> 
-								View {{ page.iconName|title }}</h3>
+								View {{ page.page_title|title }}</h3>
 							</a>
         		{% endwith %}
 					</div>

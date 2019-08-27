@@ -1,7 +1,7 @@
 # Tags relating to training sessions primarily.
 
 from django import template
-from ..models import Icon, Department, Person, Training_Session, Training_Spec
+from ..models import Category, Department, Person, Training_Session, Training_Spec
 
 register = template.Library() 
 
@@ -57,7 +57,7 @@ def session_meta(session):
 	session_cat_list = ordered_set(session_cat_list) #Preserve numerical order
 	session_depts = ordered_set(session_depts)
 
-	allcats = Icon.objects.filter(itemType = 'CAT') #All the training categories 
+	allcats = Category.objects.all() #All the training categories 
 	session_cat_dict = {} #Dictionary for use in templates
 	for cat in session_cat_list:
 		this_cat_icon = allcats.get(iconRef = cat) # Get the list of icons 
