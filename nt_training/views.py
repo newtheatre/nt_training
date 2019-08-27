@@ -5,6 +5,7 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.paginator import Paginator 
 from django.db.models.functions import Lower
 from django.forms.models import modelformset_factory
 from django.http import HttpResponse, Http404, HttpResponseRedirect
@@ -80,6 +81,7 @@ class SessionView(generic.ListView):
 	def get_queryset(self):
 		sessions = Training_Session.objects.order_by('-date')
 		return sessions 
+	paginate_by = 25
 	context_object_name = "sessions"
 
 class SessionSingleView(generic.DetailView):
