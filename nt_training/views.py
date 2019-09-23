@@ -75,7 +75,7 @@ class SessionView(generic.ListView):
 	def get_queryset(self):
 		sessions = Training_Session.objects.order_by('-date')
 		return sessions 
-	paginate_by = 25
+	paginate_by = 24
 	context_object_name = "sessions"
 
 class SessionSingleView(generic.DetailView):
