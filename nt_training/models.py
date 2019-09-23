@@ -35,17 +35,35 @@ class Department(models.Model):
 	def __str__(self):
 		return str(self.name)
 
-class Icon(models.Model):
+class Site_Page(models.Model):
 	class Meta:
-		ordering = ['itemType','weight']
-
-	itemType = models.CharField(
-		max_length=15,
-		choices = (
-			('PAGE', 'Page'),
-			('CAT', 'Training Category'),
-		),
+		verbose_name = "Site Page"
+		ordering = ['weight']
+	page_title = models.CharField(
+		max_length = 25,
 	)
+	weight = models.IntegerField()
+	primary = models.BooleanField(default=False)
+	viewName = models.CharField(max_length=25)
+	description = models.TextField(
+		null=True,
+		blank=True,
+	)
+	iconRef = models.CharField(
+		max_length=25,
+		verbose_name = "Icon Code",
+		help_text = 'From <a href="https://fontawesome.com/icons?d=gallery&m=free">Font Awesome 5</a>. Example: <code>fas fa-user</code>.'
+	)
+	iconRef.short_description = "Icon Code"
+	def __str__(self):
+		return self.page_title
+
+class Category(models.Model):
+	class Meta:
+		ordering = ['weight']
+		verbose_name = "Training Category"
+		verbose_name_plural = "Training Categories"
+
 	iconRef = models.CharField(
 		max_length=25,
 		verbose_name = "Icon Code",
@@ -54,7 +72,7 @@ class Icon(models.Model):
 	iconRef.short_description = "Icon Code"
 	iconName = models.CharField(
 		max_length=25,
-		verbose_name = 'Icon Name'
+		verbose_name = 'Category Name'
 	)
 	weight = models.IntegerField()
 	department = models.ForeignKey(
@@ -68,19 +86,8 @@ class Icon(models.Model):
 		null=True,
 		blank=True,
 	)
-	primary = models.BooleanField(default=False, help_text = "For pages only. Tick to appear on the homepage.")
-	viewName = models.CharField(
-		max_length=25,
-		null=True,
-		blank=True,
-		default=None,
-		help_text = 'For pages only.'
-	)
 	def __str__(self):
-		if self.itemType == 'PAGE':
-			return self.iconName #+ ' (' + str(self.weight) + ')'
-		elif self.itemType == 'CAT':
-			return str(self.weight) + '. ' + self.iconName
+		return str(self.weight) + '. ' + self.iconName
 
 class Person(models.Model):
 	first_name = models.CharField(max_length=50)
@@ -132,8 +139,7 @@ class Training_Spec(models.Model):
 		unique = True,
 	)
 	category = models.ForeignKey(
-		Icon,
-		limit_choices_to={'itemType': 'CAT'},
+		Category,
 		on_delete=models.DO_NOTHING,
 	)
 	trainingTitle = models.CharField(

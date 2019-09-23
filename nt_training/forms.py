@@ -5,7 +5,7 @@ import datetime
 from django import forms 
 from django.urls import reverse
 ##DB
-from .models import Icon, Training_Spec, Person, Training_Session
+from .models import Category, Training_Spec, Person, Training_Session
 
 class DateInput(forms.DateInput):
 		input_type = 'date'

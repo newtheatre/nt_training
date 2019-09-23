@@ -1,5 +1,5 @@
 from django import template
-from ..models import Icon
+from ..models import Site_Page
 
 register = template.Library() 
 
@@ -8,11 +8,11 @@ register = template.Library()
 @register.inclusion_tag('nt_training/template_tags/nav.html')
 def nav_items():
 	# Returns all the pages by their order
-	items = Icon.objects.filter(itemType='PAGE').order_by('weight')
+	items = Site_Page.objects.all().order_by('weight')
 	return {'items': items}
 
 @register.simple_tag
 def cat_items():
 	# Returns all the categories by their order
-	items = Icon.objects.filter(itemType='CAT').order_by('weight')
+	items = Category.objects.all().order_by('weight')
 	return items

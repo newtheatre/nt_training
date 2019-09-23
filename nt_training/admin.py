@@ -4,7 +4,7 @@ from django.forms import CheckboxSelectMultiple
 
 # Register your models here.
 
-from .models import Department, Icon, Person, Training_Session, Training_Spec
+from .models import Site_Page, Department, Category, Person, Training_Session, Training_Spec
 
 class PersonAdmin(admin.ModelAdmin):
 	fields = ['first_name', 'last_name','slug','email','status','grad_year', 'committee', 'is_trainer']
@@ -74,13 +74,12 @@ def add_to_dept_action(department):
 
 	return add_to_dept
 
-class IconAdmin(admin.ModelAdmin):
+class CategoryAdmin(admin.ModelAdmin):
 	prepopulated_fields = {"description": ("iconName",)}
-	list_display = ['itemType', 'department', 'weight', 'iconName', 'iconRef']
-	list_filter = ['itemType']
+	list_display = ['department', 'weight', 'iconName', 'iconRef']
 
 	def get_actions(self, request):
-		actions = super(IconAdmin, self).get_actions(request)
+		actions = super(CategoryAdmin, self).get_actions(request)
 
 		if Department.objects.all():
 			for dept in Department.objects.all():
@@ -89,11 +88,15 @@ class IconAdmin(admin.ModelAdmin):
 
 		return actions
 
+class Site_Page_Admin(admin.ModelAdmin):
+	list_display = ['page_title', 'weight', 'iconRef']
+
 class DepartmentAdmin(admin.ModelAdmin):
 	list_display = ['name', 'department_icon', 'person', 'email', 'weight']
 
+admin.site.register(Site_Page, Site_Page_Admin)
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Training_Session, TrainingSessionAdmin)
 admin.site.register(Training_Spec, TrainingSpecAdmin)
-admin.site.register(Icon, IconAdmin)
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(Department, DepartmentAdmin)
