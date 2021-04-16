@@ -1,7 +1,7 @@
 appdirs==1.4.3
 dj-database-url==0.4.2
 Django==2.2.18
-django-debug-toolbar==1.8
+django-debug-toolbar==1.11.1
 django-widget-tweaks==1.4.5
 django-widgets-improved==1.5.0
 gunicorn==19.6.0
